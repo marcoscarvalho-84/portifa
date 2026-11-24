@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title data-pt="Soluções · Marcos Carvalho">Solutions — Marcos Carvalho</title>
-<meta name="description" content="Tools and systems Marcos Carvalho designs and builds with AI, with the code open. Radar de Vagas is the first." />
+<meta name="description" content="Tools and systems Marcos Carvalho designs and builds with AI, with the code open. Radar de Vagas and Decomposer so far." />
 <meta property="og:title" content="Solutions — Marcos Carvalho" />
 <meta property="og:description" content="Systems I design and build with AI. The code is open." />
 <meta property="og:url" content="https://marcoscarvalho.work/solutions" />
@@ -39,8 +39,7 @@
         <div class="lbl rv" data-pt="Soluções">Solutions</div>
         <h1 class="mast-title rv-line"><span data-pt="Sistemas que desenho e construo com IA. O código é aberto.">Systems I design and build with AI. The code is open.</span></h1>
 
-        <!-- THE INDEX — every solution on the page, one row each. Radar de
-             Vagas is the first of several. To add one: a new <li> here (drop
+        <!-- THE INDEX — every solution on the page, one row each. To add one: a new <li> here (drop
              the "In the works" row once the shelf is full) and a new
              <article class="sys sol"> below, with the same id as the link. -->
         <ol class="sol-index">
@@ -52,8 +51,16 @@
               <span class="si-s" data-pt="<i aria-hidden=&quot;true&quot;></i>Código aberto"><i aria-hidden="true"></i>Open source</span>
             </a>
           </li>
+          <li class="rv">
+            <a href="#decomposer">
+              <span class="si-n">02</span>
+              <span class="si-t">Decomposer</span>
+              <span class="si-d" data-pt="Cole uma música e veja ela desmontada em camadas">Paste a song and see it taken apart in layers</span>
+              <span class="si-s" data-pt="<i aria-hidden=&quot;true&quot;></i>No ar"><i aria-hidden="true"></i>Live</span>
+            </a>
+          </li>
           <li class="rv is-next">
-            <span class="si-n">02</span>
+            <span class="si-n">03</span>
             <span class="si-t" data-pt="Próxima solução">Next solution</span>
             <span class="si-d" data-pt="Em produção">In the works</span>
             <span class="si-s" data-pt="Em breve">Soon</span>
@@ -108,7 +115,49 @@
           </div>
         </article>
 
-        <p class="sys-next rv" data-pt="O Radar de Vagas é a primeira. Outras soluções chegam aqui quando estiverem boas para compartilhar.">Radar de Vagas is the first. More solutions land here as they get good enough to share.</p>
+        <article class="sys sol" id="decomposer">
+          <div class="sys-head rv">
+            <span class="sys-n">02</span>
+            <span class="sys-status" data-pt="<i aria-hidden=&quot;true&quot;></i>No ar · uso livre"><i aria-hidden="true"></i>Live · free to use</span>
+            <span class="sys-year">2026</span>
+          </div>
+
+          <div class="sys-grid">
+            <div class="sys-text">
+              <h2 class="sys-title rv">Decomposer</h2>
+              <p class="sys-tag rv" data-pt="Cole uma música. A gente desmonta em <mark>camadas.</mark>">Paste a song. It comes apart in <mark>layers.</mark></p>
+              <p class="sol-lede rv" data-pt="Um app que recebe uma música por link e mostra o estilo, as camadas mínimas, o arranjo e como refazer o som só com o que já vem no Ableton Live.">A web app that takes a song from a link and shows its style, its minimal layers, the arrangement and how to rebuild the sound with only what ships in Ableton Live.</p>
+              <div class="sys-links rv">
+                <a class="sys-btn" href="https://decomposer-lake.vercel.app" target="_blank" rel="noopener" data-pt="Abrir o Decomposer <span class=&quot;arrow&quot;>↗</span>">Open Decomposer <span class="arrow">↗</span></a>
+              </div>
+              <p class="sol-meta rv">Python · Gemini · Web Audio · WebGL · Three.js · Vercel</p>
+            </div>
+
+            <div class="sys-media rv">
+              <video class="sys-loop" muted loop playsinline preload="none" poster="assets/systems/decomposer/abertura.webp" width="720" height="900" aria-label="The Decomposer opening: the logo assembles from pixel blocks above the box where you paste a song link">
+                <source src="assets/systems/decomposer/abertura.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+
+          <ol class="sol-steps">
+            <li class="rv" data-pt="<b>Cola</b><span>Um link do YouTube, Spotify, SoundCloud ou Bandcamp.</span>"><b>Paste</b><span>A link from YouTube, Spotify, SoundCloud or Bandcamp.</span></li>
+            <li class="rv" data-pt="<b>Desmonta</b><span>As camadas mínimas, cada uma na sua faixa de frequência.</span>"><b>Break down</b><span>The minimal layers, each in its frequency band.</span></li>
+            <li class="rv" data-pt="<b>Refaz</b><span>Passo a passo, só com o que já vem no Ableton Live.</span>"><b>Rebuild</b><span>Step by step, with only what ships in Ableton Live.</span></li>
+            <li class="rv" data-pt="<b>Guarda</b><span>Cada música entra num espectro musical compartilhado.</span>"><b>Collect</b><span>Every song lands on a shared musical spectrum.</span></li>
+          </ol>
+
+          <p class="sol-rule rv" data-pt="Não é música de IA. É IA para <mark>aprender a fazer.</mark>">Not AI music. AI to <mark>learn how it's made.</mark></p>
+
+          <div class="sys-strip rv" aria-label="Decomposer in four frames">
+            <figure><img src="assets/systems/decomposer/01-identifica.webp" alt="A song identified from its link: tempo, key, Camelot code and energy" loading="lazy" decoding="async" width="720" height="900"></figure>
+            <figure><img src="assets/systems/decomposer/02-camadas.webp" alt="The minimal layers of the song, each drawn as a 16 step pattern inside its frequency band" loading="lazy" decoding="async" width="720" height="900"></figure>
+            <figure><img src="assets/systems/decomposer/03-arranjo.webp" alt="The typical arrangement as a bar chart, part by part" loading="lazy" decoding="async" width="720" height="900"></figure>
+            <figure><img src="assets/systems/decomposer/04-biblioteca.webp" alt="The library: every analysed song placed on an octagon of eight musical poles" loading="lazy" decoding="async" width="720" height="900"></figure>
+          </div>
+        </article>
+
+        <p class="sys-next rv" data-pt="Outras soluções chegam aqui quando estiverem boas para compartilhar.">More solutions land here as they get good enough to share.</p>
       </div>
     </section>
 
@@ -165,11 +214,12 @@
 <script type="module" src="js/main.js?v=314"></script>
 <script type="module" src="js/v3.js?v=301"></script>
 <script type="module">
-  /* the loop only decodes while it is on screen */
-  const v = document.querySelector('.sys-loop');
-  if (v && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    new IntersectionObserver(([e]) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); },
-      { rootMargin: '120px 0px' }).observe(v);
+  /* each loop only decodes while it is on screen */
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.sys-loop').forEach(v => {
+      new IntersectionObserver(([e]) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); },
+        { rootMargin: '120px 0px' }).observe(v);
+    });
   }
 </script>
 </body>
