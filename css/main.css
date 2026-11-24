@@ -3,17 +3,17 @@
    Design tokens + full layout. See PLANO-SITE.md for the spec.
    ============================================================ */
 
-@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Th.otf") format("opentype");font-weight:200;font-display:block}
-@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Rg.otf") format("opentype");font-weight:400;font-display:block}
-@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Lg.otf") format("opentype");font-weight:500;font-display:block}
-@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Sb.otf") format("opentype");font-weight:600;font-display:block}
-@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Bd.otf") format("opentype");font-weight:700;font-display:block}
+@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Th.woff2") format("woff2"),url("../fonts/dTJakob_Th.otf") format("opentype");font-weight:200;font-display:block}
+@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Rg.woff2") format("woff2"),url("../fonts/dTJakob_Rg.otf") format("opentype");font-weight:400;font-display:block}
+@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Lg.woff2") format("woff2"),url("../fonts/dTJakob_Lg.otf") format("opentype");font-weight:500;font-display:block}
+@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Sb.woff2") format("woff2"),url("../fonts/dTJakob_Sb.otf") format("opentype");font-weight:600;font-display:block}
+@font-face{font-family:"Jakob";src:url("../fonts/dTJakob_Bd.woff2") format("woff2"),url("../fonts/dTJakob_Bd.otf") format("opentype");font-weight:700;font-display:block}
 
 /* Pacaembu (primary typeface) — 4 weights; 200/600 fall back to nearest */
-@font-face{font-family:"Pacaembu";src:url("../fonts/Pacaembu-Regular.otf") format("opentype");font-weight:400;font-display:block}
-@font-face{font-family:"Pacaembu";src:url("../fonts/Pacaembu-Medium.otf") format("opentype");font-weight:500;font-display:block}
-@font-face{font-family:"Pacaembu";src:url("../fonts/Pacaembu-Bold.otf") format("opentype");font-weight:700;font-display:block}
-@font-face{font-family:"Pacaembu";src:url("../fonts/Pacaembu-Black.otf") format("opentype");font-weight:900;font-display:block}
+@font-face{font-family:"Pacaembu";src:url("../fonts/Pacaembu-Regular.woff2") format("woff2"),url("../fonts/Pacaembu-Regular.otf") format("opentype");font-weight:400;font-display:block}
+@font-face{font-family:"Pacaembu";src:url("../fonts/Pacaembu-Medium.woff2") format("woff2"),url("../fonts/Pacaembu-Medium.otf") format("opentype");font-weight:500;font-display:block}
+@font-face{font-family:"Pacaembu";src:url("../fonts/Pacaembu-Bold.woff2") format("woff2"),url("../fonts/Pacaembu-Bold.otf") format("opentype");font-weight:700;font-display:block}
+@font-face{font-family:"Pacaembu";src:url("../fonts/Pacaembu-Black.woff2") format("woff2"),url("../fonts/Pacaembu-Black.otf") format("opentype");font-weight:900;font-display:block}
 
 :root{
   --blk:#050505;
@@ -157,6 +157,15 @@ html:not(.fonts-ready) button{cursor:auto}
   /* two words plus three links do not fit a phone bar, so the wordmark
      drops to the first name and keeps the links reachable */
   .nav .brand > span:nth-child(2){display:none}
+}
+/* four links since Systems joined: on the narrowest phones the bar tightens
+   its gaps and margins instead of pushing CONTACT off the edge */
+@media (max-width:400px){
+  .nav{padding-left:max(18px, env(safe-area-inset-left));padding-right:max(18px, env(safe-area-inset-right))}
+  .nav .navlinks{gap:10px;font-size:10.5px;letter-spacing:.03em}
+}
+@media (max-width:340px){
+  .nav .navlinks{gap:8px;font-size:10px;letter-spacing:.01em}
 }
 
 /* ---- nav wordmark reveal (home only) ----
@@ -404,41 +413,41 @@ section{position:relative}
 .cap .fig svg{width:100%;height:auto;display:block}
 
 /* AI native — the hub dispatches a packet down each wire and the agent
-   answering it lights up. That is the orchestration, drawn. Two passes: one
-   to state it, one to confirm it, then the network sits there powered. */
+   answering it lights up. That is the orchestration, drawn. It loops like a
+   gif: a quick dispatch, then most of the cycle the network sits powered. */
 .fig .wire{opacity:.3}
 .fig .pulse path{stroke-dasharray:9 240;stroke-dashoffset:-40}
 .fig .node{transform-box:fill-box;transform-origin:center;opacity:.5}
 .fig .hub{transform-box:fill-box;transform-origin:center}
-.cap.is-in .fig .pulse path{animation:figRun 1.45s cubic-bezier(.45,0,.55,1) .18s 2 both}
+.cap.is-in .fig .pulse path{animation:figRun 3.2s cubic-bezier(.45,0,.55,1) .18s infinite both}
 .cap.is-in .fig .pulse path:nth-child(2){animation-delay:.32s}
 .cap.is-in .fig .pulse path:nth-child(3){animation-delay:.46s}
 @keyframes figRun{
   0%{stroke-dashoffset:9}
-  52%,100%{stroke-dashoffset:-40}
+  24%,100%{stroke-dashoffset:-40}
 }
 /* the hub is circle 1, so the three nodes are types 2, 3 and 4 */
-.cap.is-in .fig .node{animation:figPing 1.45s ease-out .18s 2 both}
+.cap.is-in .fig .node{animation:figPing 3.2s ease-out .18s infinite both}
 .cap.is-in .fig .node:nth-of-type(3){animation-delay:.32s}
 .cap.is-in .fig .node:nth-of-type(4){animation-delay:.46s}
 @keyframes figPing{
-  0%,40%{transform:scale(1);opacity:.5}
-  54%{transform:scale(1.5);opacity:1}
-  76%,100%{transform:scale(1);opacity:.5}
+  0%,18%{transform:scale(1);opacity:.5}
+  25%{transform:scale(1.5);opacity:1}
+  35%,100%{transform:scale(1);opacity:.5}
 }
-.cap.is-in .fig .hub{animation:figHub 1.45s ease-in-out .18s 2 both}
-@keyframes figHub{0%,100%{transform:scale(1)}44%{transform:scale(1.12)}}
+.cap.is-in .fig .hub{animation:figHub 3.2s ease-in-out .18s infinite both}
+@keyframes figHub{0%,40%,100%{transform:scale(1)}20%{transform:scale(1.12)}}
 
 /* Product design — the same four products, re-composed: grid, row, column,
-   and back to grid. Nothing is added or removed, only reorganised, and the
-   figure rests on the arrangement it started from. */
+   and back to grid. Nothing is added or removed, only reorganised. Loops,
+   resting on the grid for the last third of each cycle. */
 .fig .b1{transform:translate(22px,22px)}
 .fig .b2{transform:translate(54px,22px)}
 .fig .b3{transform:translate(22px,54px)}
 .fig .b4{transform:translate(54px,54px)}
 .cap.is-in .fig .blk{
-  animation-duration:3.4s;animation-timing-function:cubic-bezier(.65,0,.35,1);
-  animation-delay:.2s;animation-iteration-count:1;animation-fill-mode:both;
+  animation-duration:5s;animation-timing-function:cubic-bezier(.65,0,.35,1);
+  animation-delay:.2s;animation-iteration-count:infinite;animation-fill-mode:both;
 }
 .cap.is-in .fig .b1{animation-name:figB1}
 .cap.is-in .fig .b2{animation-name:figB2;animation-delay:.25s}
@@ -446,26 +455,33 @@ section{position:relative}
 .cap.is-in .fig .b4{animation-name:figB4;animation-delay:.35s}
 /* all three arrangements span roughly the same box, so the figure keeps the
    optical weight of its two neighbours through the whole cycle */
-@keyframes figB1{0%{transform:translate(22px,22px)}24%,40%{transform:translate(2px,38px)}60%,76%{transform:translate(38px,2px)}100%{transform:translate(22px,22px)}}
-@keyframes figB2{0%{transform:translate(54px,22px)}24%,40%{transform:translate(26px,38px)}60%,76%{transform:translate(38px,26px)}100%{transform:translate(54px,22px)}}
-@keyframes figB3{0%{transform:translate(22px,54px)}24%,40%{transform:translate(50px,38px)}60%,76%{transform:translate(38px,50px)}100%{transform:translate(22px,54px)}}
-@keyframes figB4{0%{transform:translate(54px,54px)}24%,40%{transform:translate(74px,38px)}60%,76%{transform:translate(38px,74px)}100%{transform:translate(54px,54px)}}
+@keyframes figB1{0%{transform:translate(22px,22px)}16%,27%{transform:translate(2px,38px)}41%,52%{transform:translate(38px,2px)}68%,100%{transform:translate(22px,22px)}}
+@keyframes figB2{0%{transform:translate(54px,22px)}16%,27%{transform:translate(26px,38px)}41%,52%{transform:translate(38px,26px)}68%,100%{transform:translate(54px,22px)}}
+@keyframes figB3{0%{transform:translate(22px,54px)}16%,27%{transform:translate(50px,38px)}41%,52%{transform:translate(38px,50px)}68%,100%{transform:translate(22px,54px)}}
+@keyframes figB4{0%{transform:translate(54px,54px)}16%,27%{transform:translate(74px,38px)}41%,52%{transform:translate(38px,74px)}68%,100%{transform:translate(54px,54px)}}
 
 /* Craft & leadership — a stroke made by hand, and the dots it seeds along
    the way. pathLength=1 keeps the draw timing independent of the geometry.
    It used to end on opacity:0 and idle at dashoffset:1, which is why the
-   column could show nothing but a stray tick; now it ends drawn and stays. */
+   column could show nothing but a stray tick. Now it loops: draws, holds
+   drawn, fades, draws again. */
 .fig .draw{stroke-dasharray:1;stroke-dashoffset:0}
 .fig .seed{transform-box:fill-box;transform-origin:center}
-.cap.is-in .fig .draw{animation:figDraw 1.55s cubic-bezier(.62,0,.3,1) .15s 1 both}
-@keyframes figDraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-/* each dot lands as the stroke passes it, not all three at once */
-.cap.is-in .fig .seed{animation:figSeed .55s cubic-bezier(.16,.84,.36,1) both}
-.cap.is-in .fig .seed:nth-of-type(1){animation-delay:.62s}
-.cap.is-in .fig .seed:nth-of-type(2){animation-delay:.98s}
-.cap.is-in .fig .seed:nth-of-type(3){animation-delay:1.34s}
-@keyframes figSeed{
-  from{transform:scale(0);opacity:0}
+.cap.is-in .fig .draw{animation:figDraw 4.8s cubic-bezier(.62,0,.3,1) .15s infinite both}
+@keyframes figDraw{
+  0%{stroke-dashoffset:1;opacity:1}
+  32%,80%{stroke-dashoffset:0;opacity:1}
+  92%,100%{stroke-dashoffset:0;opacity:0}
+}
+/* each dot lands as the stroke passes it, not all three at once. One shared
+   start and per dot keyframes, so all three fade out together with the stroke */
+.cap.is-in .fig .seed{animation:4.8s cubic-bezier(.16,.84,.36,1) .15s infinite both}
+.cap.is-in .fig .seed:nth-of-type(1){animation-name:figSeed1}
+.cap.is-in .fig .seed:nth-of-type(2){animation-name:figSeed2}
+.cap.is-in .fig .seed:nth-of-type(3){animation-name:figSeed3}
+@keyframes figSeed1{0%,10%{transform:scale(0);opacity:0}21%,80%{transform:scale(1);opacity:1}92%,100%{transform:scale(1);opacity:0}}
+@keyframes figSeed2{0%,17%{transform:scale(0);opacity:0}29%,80%{transform:scale(1);opacity:1}92%,100%{transform:scale(1);opacity:0}}
+@keyframes figSeed3{0%,25%{transform:scale(0);opacity:0}36%,80%{transform:scale(1);opacity:1}92%,100%{transform:scale(1);opacity:0}}
   to{transform:scale(1);opacity:1}
 }
 
@@ -995,6 +1011,27 @@ section{position:relative}
 @media (max-width:600px){.lb-nav{font-size:40px}#lb-img{max-height:74vh}}
 @media (prefers-reduced-motion:reduce){.tile img{transition:none}.tile:hover img{transform:none}#lightbox{backdrop-filter:none}}
 
+/* Desktop: the method is one screen. The panel is exactly as tall as the
+   viewport (min, so a very short window still scrolls rather than clips), and
+   every vertical gap and figure is sized off the viewport height, so the whole
+   section lands at once instead of passing by in two scrolls. Spare height on
+   tall screens is shared by both rows; the lead centres in its row and the pair
+   keeps its proof on the floor. */
+@media (min-width:901px){
+  .whatido .max{
+    min-height:100vh;min-height:100svh;display:flex;flex-direction:column;
+    padding-block:clamp(20px,3.6vh,60px);
+  }
+  .caps{flex:1;grid-template-rows:auto auto;align-content:stretch}
+  .whatido .lbl{margin-bottom:clamp(16px,2.6vh,40px)}
+  .cap-lead{align-content:center;padding-top:clamp(16px,3vh,54px);padding-bottom:clamp(18px,3.2vh,60px)}
+  .cap-pair{padding-top:clamp(16px,3vh,38px);padding-bottom:clamp(18px,3.2vh,44px)}
+  .cap .fig{width:min(8.6vw,clamp(52px,7.5vh,126px));margin-bottom:clamp(10px,2.4vh,30px)}
+  .cap-lead .fig{width:min(10.6vw,clamp(64px,9vh,154px));margin-bottom:clamp(12px,2.8vh,38px)}
+  .cap .proof{padding-top:clamp(12px,2.4vh,26px)}
+  .cap-lead .proof{padding-top:clamp(14px,2.8vh,30px)}
+}
+
 /* ---- responsive ---- */
 @media (max-width:900px){
   /* Structural, not just smaller: the lead gives up its claim|evidence split
@@ -1151,4 +1188,113 @@ section{position:relative}
   .cap .proof::before{transition:none !important;transform:scaleX(1)}
   html,body,#gl{transition:none !important}
   #hero-montage{display:none}
+}
+
+/* ---- the three doors (home) ----
+   Systems & experiments joined product and craft as a third division. Three
+   on one hairline from 1180px; under that they stack, one per row. */
+@media (min-width:1181px){
+  .doors-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+  /* a third of the row: "experiments" has to fit its column whole */
+  .doors-grid.three .door-title{font-size:clamp(30px,3.2vw,58px)}
+  /* titles run to one line or two; the covers still share one baseline */
+  .doors-grid.three .door2{display:flex;flex-direction:column}
+  .doors-grid.three .door-lead{margin-bottom:clamp(24px,3.4vh,44px)}
+  .doors-grid.three .door-strip{margin-top:auto}
+}
+@media (max-width:1180px){
+  .doors-grid.three{grid-template-columns:1fr;gap:0}
+  .doors-grid.three .door2 + .door2{
+    border-left:0;padding-left:0;
+    border-top:1px solid var(--line-th);margin-top:clamp(32px,5vh,52px);
+  }
+  .doors-grid.three .door-strip{max-width:720px}
+}
+
+/* ---- systems page ----
+   One article per system. Text on the left at reading measure, the system's
+   own image on the right, held in view while the text runs past it. The
+   only colour is the system's own: Radar de Vagas brings its yellow
+   (#F7F00C, its one action colour, always with ink on it). */
+.systems{padding-bottom:clamp(80px,14vh,180px)}
+.sys{--sys-accent:#f7f00c;border-top:1px solid var(--line-th);padding-top:clamp(22px,3vh,36px)}
+.sys + .sys{margin-top:clamp(90px,15vh,200px)}
+.sys-head{
+  display:flex;align-items:center;gap:clamp(16px,2.6vw,40px);flex-wrap:wrap;
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-th);
+}
+.sys-n{color:var(--fg);font-variant-numeric:tabular-nums}
+.sys-status{display:inline-flex;align-items:center;gap:10px}
+.sys-status i{width:7px;height:7px;border-radius:50%;background:var(--sys-accent)}
+.sys-year{margin-left:auto}
+.sys-grid{
+  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  gap:clamp(40px,6vw,120px);margin-top:clamp(40px,7vh,96px);align-items:start;
+}
+.sys-title{font-weight:700;font-size:clamp(46px,7.6vw,128px);line-height:.94;letter-spacing:-.034em}
+.sys-tag{
+  margin-top:clamp(24px,3.4vh,42px);
+  font-weight:500;font-size:clamp(20px,2.3vw,34px);line-height:1.2;letter-spacing:-.012em;
+}
+.sys-tag mark{background:var(--sys-accent);color:#050505;padding:0 .14em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.sys-body{margin-top:clamp(30px,4.4vh,54px);max-width:54ch}
+.sys-body p{
+  font-size:clamp(17px,1.35vw,21px);line-height:1.5;
+  color:color-mix(in srgb, var(--fg) 84%, var(--bg));
+}
+.sys-body p + p{margin-top:1em}
+.sys-block{margin-top:clamp(38px,5.6vh,66px);max-width:58ch}
+.sys-lbl{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gray-th);margin-bottom:16px}
+.sys-steps,.sys-rules{list-style:none;border-top:1px solid var(--line-th)}
+.sys-steps{counter-reset:step}
+.sys-steps li,.sys-rules li{
+  position:relative;padding:15px 0 16px 42px;border-bottom:1px solid var(--line-th);
+  font-size:clamp(15px,1.15vw,18px);line-height:1.45;
+  color:color-mix(in srgb, var(--fg) 80%, var(--bg));
+}
+.sys-steps li{counter-increment:step}
+.sys-steps li::before{
+  content:counter(step, decimal-leading-zero);position:absolute;left:0;top:15px;
+  font-size:11px;letter-spacing:.12em;line-height:inherit;color:var(--gray-th);padding-top:.12em;
+}
+.sys-rules li::before{content:"";position:absolute;left:0;top:calc(15px + .74em);width:14px;height:1px;background:currentColor;opacity:.6}
+.sys-steps b{font-weight:700;color:var(--fg)}
+.sys-small{font-size:clamp(15px,1.15vw,18px);line-height:1.5;color:color-mix(in srgb, var(--fg) 80%, var(--bg))}
+.sys-stack{margin-top:16px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-th);line-height:1.8}
+.sys-links{margin-top:clamp(40px,6vh,72px);display:flex;flex-direction:column;align-items:flex-start;min-width:0;gap:clamp(30px,4.4vh,48px);max-width:100%}
+.sys-btn{
+  display:inline-flex;align-items:center;gap:12px;padding:17px 30px;border-radius:100px;
+  background:var(--sys-accent);color:#050505;border:1px solid var(--sys-accent);
+  font-size:14px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  transition:background-color .3s ease,color .3s ease;
+}
+.sys-btn .arrow{display:inline-block;transition:transform .45s cubic-bezier(.16,.84,.36,1)}
+.sys-btn:hover{background:transparent;color:var(--sys-accent)}
+.sys-btn:hover .arrow{transform:translate(.16em,-.16em)}
+.sys-btn:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.sys-try{width:100%;min-width:0}
+.sys-try pre{
+  margin:0;padding:18px 22px;border:1px solid var(--line-th);overflow-x:auto;max-width:100%;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.75;
+  color:color-mix(in srgb, var(--fg) 86%, var(--bg));
+}
+.sys-media{position:sticky;top:clamp(92px,13vh,150px)}
+.sys-loop{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;background:#000}
+.sys-strip{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(8px,1.1vw,18px);
+  margin-top:clamp(60px,10vh,130px);
+}
+.sys-strip figure{margin:0;overflow:hidden;background:#111}
+.sys-strip img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.sys-next{
+  margin-top:clamp(80px,13vh,160px);padding-top:22px;border-top:1px solid var(--line-th);
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-th);
+}
+@media (max-width:900px){
+  .sys-grid{grid-template-columns:minmax(0,1fr)}
+  .sys-media{position:static;order:-1;max-width:520px}
+  .sys-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (prefers-reduced-motion:reduce){
+  .sys-btn,.sys-btn .arrow{transition:none}
 }

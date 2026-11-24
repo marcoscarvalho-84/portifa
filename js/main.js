@@ -7,6 +7,13 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* ============ ONE FETCH OF data/projects.json PER PAGE ============
+   main.js (montage, craft wall, row hovers) and work.js (the catalogs) both
+   read it; they share this one request instead of each making their own. */
+window.__getProjects = () => (window.__projectsP ||= fetch('data/projects.json', { cache: 'no-cache' })
+  .then(r => (r.ok ? r.json() : null))
+  .catch(() => null));
+
 /* ============ SELECTED WORK ============
    The Selected-work list is baked canonically into index.html (every project,
    incl. the imported Behance cases, links to its internal projeto.html?id=...).
@@ -27,15 +34,36 @@ function runLoader() {
   const needsMeshes = !!document.getElementById('gl');
   let n = 0;
 
+  /* The count is a curtain for the first arrival, not a toll on every page.
+     Moving between pages inside the site (the wipe covers that hand-off) or
+     coming back in the same visit, the page is already cached: skip straight
+     to it. */
+  let seen = false;
+  try {
+    seen = !!(sessionStorage.getItem('pt-arrive') || sessionStorage.getItem('loader-seen'));
+    sessionStorage.setItem('loader-seen', '1');
+  } catch (e) {}
+  if (seen && !reduce) {
+    loader.style.display = 'none';
+    wipe.style.display = 'none';
+    document.body.classList.add('is-ready');
+    const stage = document.getElementById('hero-montage');
+    if (stage) stage.style.display = 'none';
+    playHeroReveal();
+    return;
+  }
+
   const step = () => {
-    n = Math.min(100, n + Math.random() * 14 + 4);
+    /* about half a second to 100 when nothing holds it back; the WebGL
+       tunnel on the home still holds it at 99 until the marks exist */
+    n = Math.min(100, n + Math.random() * 14 + 12);
     /* hold just short of 100 until the 3D marks are actually built;
        a time-based counter alone can finish before the async SVG
        extrude geometry is ready, flashing an empty canvas */
     const displayN = (n >= 100 && needsMeshes && !window.__meshesReady) ? 99 : Math.floor(n);
     pct.textContent = displayN;
     if (n < 100 || (needsMeshes && !window.__meshesReady)) {
-      setTimeout(step, 90 + Math.random() * 60);
+      setTimeout(step, 55 + Math.random() * 40);
     } else {
       pct.textContent = 100;
       finish();
@@ -70,7 +98,7 @@ function runLoader() {
     playHeroReveal();
     return;
   }
-  setTimeout(step, 200);
+  setTimeout(step, 80);
 }
 
 function playHeroReveal() {
@@ -815,13 +843,15 @@ document.querySelectorAll('[data-magnetic]').forEach(btn => {
     const wall = document.getElementById('wall');
     if (!wall || !tiles.length) return;
     /* t.big → the tile claims a 2x2 block of the strip (see .tile.big).
+       No autoplay: the observer at the end of the craft wall plays the loop
+       when the strip comes near, so its 486KB are not spent on arrival.
        A .mp4/.webm src plays as a muted loop instead of an <img>: the source
        artwork was an 8MB GIF, and h264 carries the same 13s at 486KB. */
     const isVid = (u) => /\.(mp4|webm)(\?|$)/i.test(u || '');
     wall.innerHTML = tiles.map(t => {
       const media = isVid(t.src)
         ? `<video src="${esc(t.src)}"${t.poster ? ` poster="${esc(t.poster)}"` : ''}` +
-          ` autoplay muted loop playsinline preload="metadata"></video>`
+          ` muted loop playsinline preload="none"></video>`
         : `<img src="${esc(t.src)}" loading="lazy" decoding="async" alt="${esc(t.title)}">`;
       return `<button class="tile${t.big ? ' big' : ''}" data-full="${esc(t.src)}"` +
              ` data-title="${esc(t.title)}" data-id="${esc(t.caseId)}">${media}</button>`;
@@ -851,8 +881,7 @@ document.querySelectorAll('[data-magnetic]').forEach(btn => {
     });
   }
 
-  fetch('data/projects.json', { cache: 'no-cache' })
-    .then(r => r.ok ? r.json() : null)
+  window.__getProjects()
     .then(d => {
       if (!d) return;
       if (Array.isArray(d.montage) && d.montage.length) buildMontage(d.montage);

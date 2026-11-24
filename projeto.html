@@ -4,11 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Case — Marcos Carvalho</title>
+<link rel="preload" as="font" href="fonts/Pacaembu-Regular.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="fonts/Pacaembu-Bold.woff2" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:"Pacaembu";src:url("fonts/Pacaembu-Regular.otf") format("opentype");font-weight:400;font-display:swap}
-@font-face{font-family:"Pacaembu";src:url("fonts/Pacaembu-Medium.otf") format("opentype");font-weight:500;font-display:swap}
-@font-face{font-family:"Pacaembu";src:url("fonts/Pacaembu-Bold.otf") format("opentype");font-weight:700;font-display:swap}
-@font-face{font-family:"Pacaembu";src:url("fonts/Pacaembu-Black.otf") format("opentype");font-weight:900;font-display:swap}
+@font-face{font-family:"Pacaembu";src:url("fonts/Pacaembu-Regular.woff2") format("woff2"),url("fonts/Pacaembu-Regular.otf") format("opentype");font-weight:400;font-display:swap}
+@font-face{font-family:"Pacaembu";src:url("fonts/Pacaembu-Medium.woff2") format("woff2"),url("fonts/Pacaembu-Medium.otf") format("opentype");font-weight:500;font-display:swap}
+@font-face{font-family:"Pacaembu";src:url("fonts/Pacaembu-Bold.woff2") format("woff2"),url("fonts/Pacaembu-Bold.otf") format("opentype");font-weight:700;font-display:swap}
+@font-face{font-family:"Pacaembu";src:url("fonts/Pacaembu-Black.woff2") format("woff2"),url("fonts/Pacaembu-Black.otf") format("opentype");font-weight:900;font-display:swap}
 
 :root{ --bg:#f5f4f0; --fg:#050505; --muted:#6a6a66; --line:rgba(5,5,5,.14); --maxw:1280px; }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -80,6 +82,29 @@ img{max-width:100%;display:block}
   text-decoration:none;transition:background .25s,color .25s}
 .b-link:hover{background:var(--fg);color:var(--bg)}
 .linkrow{max-width:64ch;margin:2.4em auto 0;display:flex;flex-wrap:wrap}
+
+/* animated pieces, played as video loops (see hasLoop) */
+.b-fig video.loop,.b-rowitem video.loop{width:100%;height:auto;display:block;background:#ecece9}
+
+/* the video case — first thing under the title, at the width of the page */
+.film{margin-bottom:9vh}
+.film-frame{position:relative;aspect-ratio:16/9;background:#050505;overflow:hidden}
+.film-still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:opacity .5s ease}
+.film-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.film-frame.live .film-still,.film-frame.live .film-play{opacity:0;pointer-events:none}
+.film-play{position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;
+  border:0;border-radius:50%;background:rgba(245,244,240,.92);color:#050505;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .3s cubic-bezier(.16,.84,.36,1),opacity .4s ease}
+.film-play:hover{transform:scale(1.07)}
+.film-play:focus-visible{outline:2px solid #f5f4f0;outline-offset:4px}
+.film-play svg{width:28px;height:28px;fill:currentColor;margin-left:4px}
+.film-cap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:14px;
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.film-cap a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .25s}
+.film-cap a:hover{border-color:var(--fg)}
+@media (max-width:600px){.film-play{width:64px;height:64px;margin:-32px 0 0 -32px}}
 
 /* chapters (subprojects) */
 .chapters{border-top:1px solid var(--line);margin-top:4vh}
@@ -301,6 +326,110 @@ function youtubeId(url){
   return null;
 }
 
+/* ---------- animated images as video loops ----------
+   The Behance imports brought animated WebPs of 2 to 8 MB each. Each one now
+   has an H.264 loop beside it (same name, .mp4) and a still for its poster;
+   the block keeps src pointing at the WebP so the CMS still edits it as an
+   image. The loop is only used while it is still the same piece: a block
+   whose image was swapped in the CMS no longer matches and falls back. */
+function hasLoop(b){
+  return !!(b && b.video && b.src &&
+    b.video.replace(/\.(mp4|webm)$/i, '') === b.src.replace(/\.(webp|gif|png|jpe?g)$/i, ''));
+}
+function loopHTML(b){
+  const ratio = /^\d+\/\d+$/.test(b.ratio || '') ? ` style="aspect-ratio:${b.ratio}"` : '';
+  return `<video class="loop" muted loop playsinline preload="none"${ratio}` +
+    (b.poster ? ` poster="${esc(b.poster)}"` : '') +
+    ` aria-label="${esc(b.alt || b.caption || '')}"><source src="${esc(b.video)}" type="video/mp4"></video>`;
+}
+/* loops play only while on screen, so a long case never decodes ten at once */
+function setupLoops(root){
+  const vids = root.querySelectorAll('video.loop');
+  if (!vids.length) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting && !reduce){ v.play().catch(() => {}); }
+    else if (!v.paused){ v.pause(); }
+  }), { rootMargin: '120px 0px' });
+  vids.forEach(v => io.observe(v));
+}
+
+/* ---------- the video case (YouTube) ----------
+   A case with a film carries `videoCase: { youtube: "<id or link>", label }`.
+   It sits right under the title. Nothing from YouTube loads with the page:
+   the frame shows YouTube's own still until the film is on screen, and only
+   then the player comes in and starts. Browsers only allow a page to start a
+   video by itself without sound, so it starts muted and the player's own
+   button brings the sound in. It pauses when you scroll past it and picks up
+   again when you come back. Reduced motion: no autoplay, it waits for a click. */
+function filmId(v){
+  if (!v) return null;
+  const raw = String(v.youtube || v.url || '').trim();
+  if (/^[\w-]{11}$/.test(raw)) return raw;
+  return youtubeId(raw);
+}
+function renderFilm(p){
+  const id = filmId(p.videoCase);
+  if (!id) return null;
+  const sec = document.createElement('section');
+  sec.className = 'film wrap rv';
+  const label = p.videoCase.label || 'Video case';
+  sec.innerHTML = `<div class="film-frame" data-yt="${esc(id)}">
+      <img class="film-still" src="https://i.ytimg.com/vi/${esc(id)}/maxresdefault.jpg" alt="" decoding="async">
+      <button class="film-play" type="button" aria-label="Play the video case: ${esc(p.title || '')}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+      </button>
+    </div>
+    <div class="film-cap"><span>${esc(label)}</span><a href="https://www.youtube.com/watch?v=${esc(id)}" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>`;
+  /* YouTube has no maxres still for some uploads; its hq still always exists */
+  const still = sec.querySelector('.film-still');
+  still.addEventListener('load', () => {
+    if (still.naturalWidth <= 120 && !still.dataset.fallback){
+      still.dataset.fallback = '1';
+      still.src = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+    }
+  });
+  return sec;
+}
+function setupFilm(root){
+  const frame = root.querySelector('.film-frame');
+  if (!frame) return;
+  const id = frame.dataset.yt;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let iframe = null;
+  const send = (func) => {
+    if (iframe && iframe.contentWindow)
+      iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*');
+  };
+  const load = (withSound) => {
+    if (iframe) return;
+    const q = new URLSearchParams({
+      autoplay: '1', mute: withSound ? '0' : '1', playsinline: '1', rel: '0',
+      modestbranding: '1', enablejsapi: '1', loop: '1', playlist: id, origin: location.origin,
+      cc_load_policy: '0', iv_load_policy: '3',
+    });
+    iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube-nocookie.com/embed/${id}?${q}`;
+    iframe.title = 'Video case';
+    iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    frame.appendChild(iframe);
+    frame.classList.add('live');
+  };
+  frame.querySelector('.film-play').addEventListener('click', () => load(true));
+  let pausedByScroll = false;
+  new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting){
+      if (!iframe){ if (!reduce) load(false); }
+      else if (pausedByScroll){ send('playVideo'); pausedByScroll = false; }
+    } else if (iframe && !pausedByScroll){
+      send('pauseVideo'); pausedByScroll = true;
+    }
+  }), { threshold: 0.4 }).observe(frame);
+}
+
 (async function init(){
   data = await loadData();
   project = data.projects.find(p => p.id === id) || null;
@@ -340,7 +469,8 @@ function renderBlock(b){
   if (b.type === 'image' && b.src){
     const fig = document.createElement('figure');
     fig.className = 'b-fig rv';
-    fig.innerHTML = `<img src="${b.src}" alt="${esc(b.alt || b.caption)}" loading="lazy" decoding="async">` +
+    fig.innerHTML = (hasLoop(b) ? loopHTML(b)
+      : `<img src="${b.src}" alt="${esc(b.alt || b.caption)}" loading="lazy" decoding="async">`) +
       (b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : '');
     return fig;
   }
@@ -404,7 +534,14 @@ function renderImageRow(imgs){
     // initial estimate from stored dims (avoids layout jump), then corrected to
     // the TRUE aspect on load so the row heights come out perfectly uniform
     fig.style.flexGrow = (b.w && b.h) ? (b.w / b.h) : 1.5;
-    fig.innerHTML = `<img src="${b.src}" alt="${esc(b.alt || b.caption || '')}" decoding="async">` +
+    if (hasLoop(b)){
+      const [rw, rh] = String(b.ratio || '').split('/').map(Number);
+      if (rw && rh) fig.style.flexGrow = rw / rh;
+      fig.innerHTML = loopHTML(b) + (b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : '');
+      row.appendChild(fig);
+      return;
+    }
+    fig.innerHTML = `<img src="${b.src}" alt="${esc(b.alt || b.caption || '')}" loading="lazy" decoding="async">` +
                     (b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : '');
     const img = fig.querySelector('img');
     img.addEventListener('load', () => { if (img.naturalHeight) fig.style.flexGrow = img.naturalWidth / img.naturalHeight; }, { once: true });
@@ -461,6 +598,10 @@ function render(p){
   </div>`;
   frag.appendChild(hero);
 
+  // the video case, when there is one, is the first thing after the title
+  const film = renderFilm(p);
+  if (film) frag.appendChild(film);
+
   // overview blocks (project-level content) — todas as imagens ficam no corpo
   if (p.blocks && p.blocks.length){
     const ov = document.createElement('section');
@@ -516,7 +657,7 @@ function render(p){
         imgBlocks.forEach(b => {
           const fig = document.createElement('figure');
           fig.className = 'gslide';
-          fig.innerHTML = `<img src="${b.src}" alt="${esc(b.alt || b.caption || '')}" decoding="async">` +
+          fig.innerHTML = `<img src="${b.src}" alt="${esc(b.alt || b.caption || '')}" loading="lazy" decoding="async">` +
                           (b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : '');
           track.appendChild(fig);
         });
@@ -572,6 +713,8 @@ function render(p){
 
   app.appendChild(frag);
   hydrateVideoBlocks(app);
+  setupLoops(app);
+  setupFilm(app);
   setupReveals();
   initGalleries();
   initChNav();

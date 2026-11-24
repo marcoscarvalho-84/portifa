@@ -20,6 +20,10 @@ const esc = (s) => String(s ?? '').replace(/[&<>"]/g,
 
 const mounts = [...document.querySelectorAll('[data-catalog]')];
 
+/* a case that carries a film says so in its line, so it is found from the list */
+const metaOf = (p) => (p.videoCase && (p.videoCase.youtube || p.videoCase.url))
+  ? `${p.meta || ''}${p.meta ? ' · ' : ''}Video case` : (p.meta || '');
+
 /* line list — the product register. The cover rides on the right of the row
    instead of only appearing under the cursor: the floating follower showed one
    project at a time and only while hovering, so scanning the list gave you
@@ -37,7 +41,7 @@ function rowHTML(p) {
     + ` data-cat="${esc(p.meta)}">`
     + `<span class="t">${esc(p.title)} <span class="arrow">↗</span></span>`
     + cover
-    + `<span class="m">${esc(p.meta)}</span></a>`;
+    + `<span class="m">${esc(metaOf(p))}</span></a>`;
 }
 
 /* strip — the covers under the craft door. A uniform crop is right here and
@@ -64,11 +68,11 @@ function cardHTML(p) {
     + `<span class="gcard-img">${img}</span>`
     + `<span class="gcard-meta"><span class="gt">${esc(p.title)}`
     + ` <span class="arrow">↗</span></span>`
-    + `<span class="gm">${esc(p.meta)}</span></span></a>`;
+    + `<span class="gm">${esc(metaOf(p))}</span></span></a>`;
 }
 
-fetch('data/projects.json', { cache: 'no-cache' })
-  .then(r => (r.ok ? r.json() : null))
+(window.__getProjects ? window.__getProjects()
+  : fetch('data/projects.json', { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null)))
   .then(d => {
     if (!d || !mounts.length || !Array.isArray(d.projects)) return;
     const TPL = { grid: cardHTML, strip: stripHTML, list: rowHTML };

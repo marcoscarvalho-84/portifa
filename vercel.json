@@ -17,6 +17,10 @@
       "destination": "/craft.html"
     },
     {
+      "source": "/systems",
+      "destination": "/systems.html"
+    },
+    {
       "source": "/presentation",
       "destination": "/presentation.html"
     },
