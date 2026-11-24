@@ -90,9 +90,13 @@ const loader = new SVGLoader();
 function addForm(data, index) {
   const shapes = [];
   data.paths.forEach(p => SVGLoader.createShapes(p).forEach(s => shapes.push(s)));
+  /* v3: 72/16 built 15 million vertices across the three marks and held the
+     main thread for ~1.3s before anything could show. 36/8 keeps every facet
+     under a pixel at the sizes these marks are drawn, at about a fifth of the
+     geometry. */
   const geo = new THREE.ExtrudeGeometry(shapes, {
     depth: 14, bevelEnabled: true, bevelThickness: 4, bevelSize: 3,
-    bevelSegments: 16, curveSegments: 72
+    bevelSegments: 8, curveSegments: 36
   });
   geo.center();
   geo.computeBoundingBox();
@@ -119,17 +123,36 @@ function addForm(data, index) {
   forms[index] = mesh;
   scene.add(mesh);
 }
-let loadedCount = 0;
-SYMBOLS.forEach((name, i) => loader.load(`assets/cerol/${name}.svg`, d => {
-  addForm(d, i);
-  loadedCount++;
-  if (loadedCount === SYMBOLS.length) {
-    window.__meshesReady = true;
-    if (window.__alignTunnel) window.__alignTunnel();
-  }
-}));
-/* safety net: never let the loader hang forever if an asset fails */
-setTimeout(() => { window.__meshesReady = true; }, 4000);
+/* v3: nothing waits for the 3D any more. The hero mark is built first and the
+   canvas fades in over the poster as soon as it exists; the two travelling
+   marks are built afterwards, one per idle slot, since nobody sees them before
+   the first scroll. */
+const idle = (fn) => (window.requestIdleCallback
+  ? requestIdleCallback(fn, { timeout: 1200 }) : setTimeout(fn, 60));
+function heroReady() {
+  if (window.__heroReady) return;
+  window.__heroReady = true;
+  /* two frames: the first one with the mark actually drawn, then the fade */
+  requestAnimationFrame(() => requestAnimationFrame(() =>
+    document.documentElement.classList.add('gl-ready')));
+}
+loader.load(`assets/cerol/${SYMBOLS[0]}.svg`, d => {
+  addForm(d, 0);
+  heroReady();
+  /* phones keep only the hero mark: the two travelling marks are never
+     fetched or built there (see also the parking in tick()) */
+  if (isMobile) { window.__meshesReady = true; return; }
+  let left = SYMBOLS.length - 1;
+  SYMBOLS.slice(1).forEach((name, k) => loader.load(`assets/cerol/${name}.svg`, dd => idle(() => {
+    addForm(dd, k + 1);
+    if (--left === 0) {
+      window.__meshesReady = true;
+      if (window.__alignTunnel) window.__alignTunnel();
+    }
+  })));
+}, undefined, heroReady);
+/* safety net: if an asset fails, the poster still hands over */
+setTimeout(() => { heroReady(); window.__meshesReady = true; }, 6000);
 
 /* ---- orbit type: the wordmark circling the hero mark ----
    Same construction as brik.space's Orbit Type: a ribbon of triangles swept
@@ -509,8 +532,16 @@ addEventListener('resize', () => {
 let targetZ = 5;
 const clock = new THREE.Clock();
 
+let parked = false;
 function tick() {
   requestAnimationFrame(tick);
+  /* phones: once the hero is behind you there is nothing left to draw, so
+     the canvas hides and the GPU rests until you scroll back up */
+  if (isMobile) {
+    const away = window.scrollY > innerHeight * 1.15;
+    if (away !== parked) { parked = away; canvas.style.visibility = away ? 'hidden' : ''; document.body.classList.toggle('gl-parked', away); }
+    if (away) return;
+  }
   /* no manual document.hidden pause: real browsers already throttle rAF
      natively for backgrounded tabs, and an explicit early return here can
      leave the canvas permanently unrendered in some embedding contexts

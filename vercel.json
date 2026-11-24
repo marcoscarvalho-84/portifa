@@ -17,8 +17,8 @@
       "destination": "/craft.html"
     },
     {
-      "source": "/systems",
-      "destination": "/systems.html"
+      "source": "/solutions",
+      "destination": "/solutions.html"
     },
     {
       "source": "/presentation",
@@ -56,6 +56,13 @@
           "value": "public, max-age=0, must-revalidate"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/systems",
+      "destination": "/solutions",
+      "permanent": false
     }
   ]
 }

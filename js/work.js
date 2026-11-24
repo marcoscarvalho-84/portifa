@@ -22,7 +22,7 @@ const mounts = [...document.querySelectorAll('[data-catalog]')];
 
 /* a case that carries a film says so in its line, so it is found from the list */
 const metaOf = (p) => (p.videoCase && (p.videoCase.youtube || p.videoCase.url))
-  ? `${p.meta || ''}${p.meta ? ' · ' : ''}Video case` : (p.meta || '');
+  ? `${p.meta || ''}${p.meta ? ' · ' : ''}${window.__t ? window.__t('Video case') : 'Video case'}` : (p.meta || '');
 
 /* line list — the product register. The cover rides on the right of the row
    instead of only appearing under the cursor: the floating follower showed one

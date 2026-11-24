@@ -1298,3 +1298,383 @@ section{position:relative}
 @media (prefers-reduced-motion:reduce){
   .sys-btn,.sys-btn .arrow{transition:none}
 }
+
+/* ============================================================
+   v3 — less text, more impact, nothing waits on the 3D
+   ============================================================ */
+
+/* ---- hero poster: a still of the 3D hero, shown on the first paint and
+   faded out once the live canvas has drawn the mark (scene.js adds
+   .gl-ready to <html>). Desktop: a square the height of the viewport,
+   centred, which is exactly how the camera frames the mark there. Portrait
+   screens get their own still, since the ring is pulled in to fit. ---- */
+.hero-poster{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  transition:opacity .8s cubic-bezier(.4,0,.2,1)}
+.hero-poster img{position:absolute;top:0;left:50%;width:100vh;height:100vh;max-width:none;
+  transform:translateX(-50%);display:block}
+@media (max-aspect-ratio:4/5){
+  .hero-poster img{left:0;width:100%;transform:none;object-fit:cover}
+}
+.gl-ready .hero-poster{opacity:0}
+.hero .btm{position:relative;z-index:1}
+.hero .scroll-cue{z-index:1}
+
+/* ---- statement: one sentence, three numbers ---- */
+.statement{padding-top:clamp(70px,13vh,170px);padding-bottom:clamp(60px,10vh,140px)}
+.st-title{font-weight:700;font-size:clamp(42px,8.6vw,156px);line-height:.92;letter-spacing:-.04em}
+.st-title .rv-line{display:block}
+.st-title .rv-line:nth-child(2) > *{transition-delay:.08s}
+.st-title .rv-line:nth-child(3) > *{transition-delay:.16s}
+.st-facts{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:clamp(56px,9vh,120px);border-top:1px solid var(--line-th)}
+.st-facts li{padding:clamp(22px,3vh,34px) clamp(16px,2vw,32px) 0 0;min-width:0}
+.st-facts li + li{border-left:1px solid var(--line-th);padding-left:clamp(16px,2vw,32px)}
+.st-facts li:nth-child(2){transition-delay:.1s}
+.st-facts li:nth-child(3){transition-delay:.2s}
+.st-facts b{display:block;font-weight:700;font-size:clamp(48px,7vw,124px);line-height:.9;
+  letter-spacing:-.045em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.st-facts span{display:block;margin-top:14px;font-size:12px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gray-th);line-height:1.5;max-width:22ch}
+@media (max-width:640px){
+  .st-facts{grid-template-columns:1fr}
+  .st-facts li + li{border-left:0;padding-left:0;border-top:1px solid var(--line-th);margin-top:22px}
+  .st-facts li{display:flex;align-items:baseline;gap:18px;padding-right:0}
+  .st-facts b{font-size:clamp(52px,17vw,84px);min-width:2.3ch}
+  .st-facts span{margin-top:0}
+}
+
+/* ---- the three doors: one word each, numbered ---- */
+.door-n{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gray-th);margin-bottom:clamp(14px,2vh,22px)}
+.door-new{font-style:normal;background:#f7f00c;color:#050505;letter-spacing:.14em;
+  padding:3px 8px 2px;font-weight:600}
+.v3 .doors-grid.three .door-title{font-size:clamp(44px,5vw,92px)}
+.v3 .door2 .door-lead{font-weight:400;font-size:clamp(15px,1.3vw,19px)}
+@media (max-width:1180px){
+  .v3 .doors-grid.three .door-title{font-size:clamp(44px,11vw,92px)}
+}
+.door2:hover .dcover img{transform:scale(1.09)}
+.door2:hover .door-title .arrow{transform:translate(.16em,-.16em)}
+
+/* ---- how I work, as three lines ---- */
+.caps.trio{grid-template-columns:repeat(3,minmax(0,1fr))}
+.caps.trio .cap{padding:clamp(30px,3.4vw,46px) clamp(18px,2.2vw,34px) clamp(34px,3.6vw,50px)}
+.caps.trio .cap:first-child{padding-left:0}
+.caps.trio .cap:last-child{padding-right:0}
+.caps.trio .cap + .cap{border-left:1px solid var(--line-th)}
+.caps.trio .cap:nth-child(2){transition-delay:.1s}
+.caps.trio .cap:nth-child(3){transition-delay:.2s}
+.caps.trio h3{font-weight:700;font-size:clamp(24px,2.5vw,38px)}
+.caps.trio .lead{font-weight:400;color:color-mix(in srgb, var(--fg) 78%, var(--bg))}
+@media (max-width:860px){
+  .caps.trio{grid-template-columns:1fr}
+  .caps.trio .cap{padding-left:0;padding-right:0}
+  .caps.trio .cap + .cap{border-left:0}
+}
+
+/* ---- about, as one line ---- */
+.v3 .about p{font-weight:300;font-size:clamp(28px,4vw,64px);line-height:1.04;letter-spacing:-.025em}
+.v3 .about p b{font-weight:700}
+
+/* ---- solutions page ---- */
+.sol .sys-grid{margin-top:clamp(30px,5vh,64px)}
+.sol-lede{margin-top:clamp(26px,3.6vh,44px);max-width:34ch;
+  font-size:clamp(18px,1.6vw,23px);line-height:1.36;color:color-mix(in srgb, var(--fg) 82%, var(--bg))}
+.sol-steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  margin-top:clamp(56px,9vh,110px);border-top:1px solid var(--line-th);counter-reset:sol}
+.sol-steps li{counter-increment:sol;padding:clamp(20px,3vh,30px) clamp(14px,1.6vw,26px) 0 0;min-width:0}
+.sol-steps li + li{border-left:1px solid var(--line-th);padding-left:clamp(14px,1.6vw,26px)}
+.sol-steps li::before{content:"0" counter(sol);display:block;font-size:12px;letter-spacing:.2em;color:var(--gray-th);margin-bottom:clamp(16px,2.4vh,28px)}
+.sol-steps b{display:block;font-weight:700;font-size:clamp(28px,3vw,52px);line-height:.96;letter-spacing:-.03em}
+.sol-steps span{display:block;margin-top:12px;font-size:clamp(14px,1.05vw,16px);line-height:1.45;
+  color:color-mix(in srgb, var(--fg) 72%, var(--bg));max-width:24ch}
+.sol-steps li:nth-child(2){transition-delay:.08s}
+.sol-steps li:nth-child(3){transition-delay:.16s}
+.sol-steps li:nth-child(4){transition-delay:.24s}
+.sol-rule{margin-top:clamp(56px,9vh,110px);font-weight:700;letter-spacing:-.035em;
+  font-size:clamp(34px,5.6vw,96px);line-height:.95;max-width:16ch}
+.sol-rule mark{background:var(--sys-accent);color:#050505;padding:0 .1em;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.sol .sys-links{margin-top:clamp(36px,5vh,60px)}
+.sol .sys-strip{margin-top:clamp(56px,9vh,110px)}
+.sol-meta{margin-top:18px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-th);line-height:1.8}
+@media (max-width:860px){
+  .sol-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sol-steps li:nth-child(3){border-left:0;padding-left:0}
+  .sol-steps li:nth-child(n+3){border-top:1px solid var(--line-th);margin-top:clamp(20px,3vh,30px)}
+}
+/* one-word titles fit three abreast well below 1180px */
+@media (min-width:861px) and (max-width:1180px){
+  .v3 .doors-grid.three{grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,40px)}
+  .v3 .doors-grid.three .door2{display:flex;flex-direction:column}
+  .v3 .doors-grid.three .door2 + .door2{border-top:0;margin-top:0;border-left:1px solid var(--line-th);padding-left:clamp(20px,2.6vw,34px)}
+  .v3 .doors-grid.three .door-title{font-size:clamp(36px,5vw,58px)}
+  .v3 .doors-grid.three .door-lead{margin-bottom:clamp(20px,3vh,36px)}
+  .v3 .doors-grid.three .door-strip{margin-top:auto}
+}
+@media (max-width:860px){
+  .v3 .doors-grid.three .door-strip{max-width:none}
+}
+/* the method no longer needs a whole screen: three lines, sized to content */
+@media (min-width:901px){
+  .v3 .whatido .max{min-height:0;width:100%;max-width:min(1600px,100%)}
+  .v3 .caps.trio{flex:none;grid-template-rows:auto}
+  .v3 .caps.trio .cap{padding-top:clamp(26px,4vh,46px);padding-bottom:clamp(30px,4.4vh,50px)}
+}
+@media (max-width:900px){
+  .v3 .caps.trio .cap{padding:24px 0}
+}
+/* the catalog mastheads lost their lead paragraph; close the gap it left */
+.v3 .masthead{padding-bottom:clamp(36px,6vh,90px)}
+.v3 .masthead + .craftgrid{padding-top:clamp(30px,5vh,80px)}
+
+/* ---- solutions index: the page is a shelf, Radar de Vagas is row 01 ---- */
+.sol-index{list-style:none;margin-top:clamp(48px,8vh,104px);border-top:1px solid var(--line-th)}
+.sol-index li{border-bottom:1px solid var(--line-th)}
+.sol-index li:nth-child(2){transition-delay:.08s}
+.sol-index li:nth-child(3){transition-delay:.16s}
+.sol-index a,.sol-index li.is-next{
+  display:grid;grid-template-columns:3.2em minmax(0,1.1fr) minmax(0,1fr) 11em;
+  align-items:baseline;gap:clamp(12px,2vw,32px);padding:clamp(18px,2.6vh,28px) 0}
+.si-n{font-size:12px;letter-spacing:.2em;color:var(--gray-th);font-variant-numeric:tabular-nums}
+.si-t{font-weight:700;font-size:clamp(24px,2.6vw,42px);line-height:1;letter-spacing:-.025em}
+.si-d{font-size:clamp(14px,1.1vw,17px);line-height:1.4;color:color-mix(in srgb, var(--fg) 70%, var(--bg))}
+.si-s{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gray-th);white-space:nowrap;justify-self:end}
+.si-s i{width:7px;height:7px;border-radius:50%;background:#f7f00c}
+.sol-index a .si-t{transition:transform .45s cubic-bezier(.16,.84,.36,1)}
+.sol-index a:hover .si-t{transform:translateX(.2em)}
+.sol-index a:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.sol-index .is-next .si-t,.sol-index .is-next .si-d{color:var(--gray-th)}
+.sol-index .is-next .si-t{font-weight:400}
+@media (max-width:700px){
+  .sol-index a,.sol-index li.is-next{grid-template-columns:2.4em minmax(0,1fr);row-gap:8px}
+  .si-d,.si-s{grid-column:2}
+  .si-s{justify-self:start}
+}
+
+/* ============================================================
+   v3.1 — topics, brand blocks, door reels, the method drawing
+   ============================================================ */
+
+/* ---- worked across: one block per territory, with where it happened ---- */
+.st-lbl{margin-top:clamp(64px,10vh,130px);margin-bottom:clamp(18px,2.6vh,30px)}
+.topics,.brands{list-style:none;display:grid;border-top:1px solid var(--line-th);border-left:1px solid var(--line-th)}
+.topics{grid-template-columns:repeat(4,minmax(0,1fr))}
+.topics li{border-right:1px solid var(--line-th);border-bottom:1px solid var(--line-th);
+  padding:clamp(18px,2.2vw,32px);min-height:clamp(132px,14vw,200px);min-width:0;
+  display:flex;flex-direction:column;justify-content:space-between;gap:16px;
+  transition:opacity .9s cubic-bezier(.16,.84,.36,1), transform .9s cubic-bezier(.16,.84,.36,1),
+             background-color .3s, color .3s}
+.topics b{font-weight:700;font-size:clamp(24px,2.6vw,44px);line-height:1;letter-spacing:-.03em;
+  hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.topics span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-th);line-height:1.5}
+.topics li:hover{background:var(--fg);color:var(--bg)}
+.topics li:hover span{color:color-mix(in srgb, var(--bg) 66%, var(--fg))}
+.topics li:nth-child(4n+2),.brands li:nth-child(3n+2){transition-delay:.06s}
+.topics li:nth-child(4n+3),.brands li:nth-child(3n+3){transition-delay:.12s}
+.topics li:nth-child(4n+4){transition-delay:.18s}
+@media (max-width:760px){
+  .topics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .topics li{min-height:112px;padding:16px 14px}
+  .topics b{font-size:clamp(20px,6vw,28px)}
+  .topics span{font-size:10px;letter-spacing:.12em}
+}
+
+/* ---- brands, as blocks ---- */
+.brands{grid-template-columns:repeat(9,minmax(0,1fr))}
+.brands li{border-right:1px solid var(--line-th);border-bottom:1px solid var(--line-th);
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;min-width:0;
+  --base:clamp(15px,1.5vw,27px)}
+.brands img{height:calc(var(--base) * var(--k,1));width:auto;max-width:76%;object-fit:contain;display:block}
+:root[data-theme="dark"] .brands img{filter:invert(1)}
+@media (max-width:900px){
+  .brands{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .brands li{--base:clamp(17px,5vw,28px)}
+}
+
+/* ---- door reels: one frame, the work behind the door cutting through it ---- */
+.door-reel{position:relative;display:block;overflow:hidden;background:#111;aspect-ratio:4/3;
+  margin-top:clamp(24px,3.4vh,44px)}
+.door-reel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+  transform:scale(1.02);transition:transform 1s cubic-bezier(.16,.84,.36,1)}
+.door-reel img.on{opacity:1}
+.door2:hover .door-reel img{transform:scale(1.07)}
+@media (min-width:861px){
+  .v3 .doors-grid.three .door-reel{margin-top:auto}
+}
+
+/* ---- how I work: the method drawing ---- */
+.method{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:center;
+  gap:clamp(32px,5vw,96px);border-top:1px solid var(--line-th);padding-top:clamp(28px,4vh,52px)}
+.mt-stage{width:100%;max-width:500px;justify-self:center}
+.mt{width:100%;height:auto;display:block;color:var(--fg);overflow:visible;transition:opacity .4s}
+.mt.mt-fade{opacity:0}
+.mt.mt-instant,.mt.mt-instant *{transition:none !important}
+
+/* product: four blocks, scattered until they lock into the grid */
+.mt-b{fill:#050505;transform-box:fill-box;transform-origin:center;
+  transition:transform 1.1s cubic-bezier(.16,.84,.36,1), opacity .7s}
+.mt:not(.p1) .b1{transform:translate(-64px,-46px) rotate(-24deg) scale(.7);opacity:.25}
+.mt:not(.p1) .b2{transform:translate(58px,-76px) rotate(30deg) scale(.6);opacity:.25}
+.mt:not(.p1) .b3{transform:translate(-44px,66px) rotate(14deg) scale(.74);opacity:.25}
+.mt:not(.p1) .b4{transform:translate(78px,48px) rotate(-36deg) scale(.64);opacity:.25}
+.mt.p1 .b2{transition-delay:.07s}
+.mt.p1 .b3{transition-delay:.14s}
+.mt.p1 .b4{transition-delay:.21s}
+
+/* AI: the hub appears, wires reach every block, work pulses down each one
+   and the block that receives it lights up */
+.mt-hub{fill:currentColor;transform-box:fill-box;transform-origin:center;transform:scale(0);
+  transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.mt.p2 .mt-hub{transform:scale(1)}
+.mt-wires path{stroke-dasharray:1;stroke-dashoffset:1;opacity:.5;
+  transition:stroke-dashoffset .7s cubic-bezier(.4,0,.2,1) .2s}
+.mt.p2 .mt-wires path{stroke-dashoffset:0}
+.mt-pulses path{stroke-width:5;stroke-dasharray:.16 1.3;stroke-dashoffset:.16}
+.mt.p2 .mt-pulses path{animation:mtPulse 1.6s linear infinite}
+.mt.p2 .mt-b{animation:mtAnswer 1.6s linear infinite}
+.mt.p2 .mt-pulses path:nth-child(2),.mt.p2 .b2{animation-delay:.4s}
+.mt.p2 .mt-pulses path:nth-child(3),.mt.p2 .b3{animation-delay:.8s}
+.mt.p2 .mt-pulses path:nth-child(4),.mt.p2 .b4{animation-delay:1.2s}
+@keyframes mtPulse{from{stroke-dashoffset:.16}to{stroke-dashoffset:-1}}
+/* the pulse crosses into its block about halfway through the cycle */
+@keyframes mtAnswer{0%,46%{fill:#050505}53%{fill:#bdbcb7}82%,100%{fill:#050505}}
+/* a dash that has not started yet still paints its round cap; keep each
+   layer invisible until its step */
+.mt:not(.p2) .mt-wires,.mt:not(.p2) .mt-pulses{opacity:0}
+.mt:not(.p3) .mt-loop{opacity:0}
+
+/* craft: a line drawn by hand ties the whole system together */
+.mt-loop{stroke-width:2.6;stroke-dasharray:1;stroke-dashoffset:1;
+  transition:stroke-dashoffset 1.7s cubic-bezier(.65,0,.35,1)}
+.mt.p3 .mt-loop{stroke-dashoffset:0}
+.mt-seed{fill:currentColor;transform-box:fill-box;transform-origin:center;transform:scale(0);
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1)}
+.mt.p3 .mt-seed{transform:scale(1)}
+.mt.p3 .s1{transition-delay:.45s}
+.mt.p3 .s2{transition-delay:.85s}
+.mt.p3 .s3{transition-delay:1.25s}
+
+/* all three, held: the system breathes */
+.mt-all{transform-origin:240px 240px}
+.mt.p4 .mt-all{animation:mtBreathe 3.4s ease-in-out infinite}
+@keyframes mtBreathe{0%,100%{transform:scale(.97)}50%{transform:scale(1.015)}}
+
+/* the list that follows the drawing */
+.mt-list{list-style:none;border-top:1px solid var(--line-th)}
+.mt-list li{border-bottom:1px solid var(--line-th)}
+.mt-list button{all:unset;box-sizing:border-box;position:relative;display:grid;
+  grid-template-columns:2.8em minmax(0,1fr);column-gap:10px;width:100%;
+  padding:clamp(18px,2.6vh,28px) 0;opacity:.36;transition:opacity .5s}
+.mt-list button.is-active{opacity:1}
+.mt-list button.is-done{opacity:.6}
+.mt-list button:hover{opacity:1}
+.mt-list button:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.mt-n{grid-row:1 / 3;font-size:12px;letter-spacing:.2em;color:var(--gray-th);padding-top:.7em}
+.mt-h{font-weight:700;font-size:clamp(24px,2.4vw,38px);line-height:1.05;letter-spacing:-.025em}
+.mt-p{grid-column:2;margin-top:10px;font-size:clamp(15px,1.15vw,18px);line-height:1.45;
+  color:color-mix(in srgb, var(--fg) 76%, var(--bg));max-width:44ch}
+.mt-bar{position:absolute;left:0;right:0;bottom:-1px;height:1px;background:var(--fg);
+  transform:scaleX(0);transform-origin:left}
+.mt-list .is-active .mt-bar{animation:mtBar var(--dur,2600ms) linear forwards}
+.method.is-all .mt-bar{animation:none;transform:scaleX(1)}
+@keyframes mtBar{to{transform:scaleX(1)}}
+@media (max-width:860px){
+  .method{grid-template-columns:1fr;gap:20px}
+  .mt-stage{max-width:300px}
+}
+@media (prefers-reduced-motion:reduce){
+  .mt *{animation:none !important}
+  .mt-list button{opacity:1}
+}
+
+/* ---- phones: the 3D stays in the hero, so the windows it used to cross
+   further down would only be empty bands ---- */
+@media (max-width:767px){
+  .v3 .inter{height:0}
+}
+/* the tilt chip only makes sense while the mark is on screen */
+#motion-cta{transition:opacity .3s}
+.gl-parked #motion-cta{opacity:0;pointer-events:none}
+/* the one long name steps down a size so "visualisation" never breaks */
+.topics .long b{font-size:clamp(19px,2.1vw,36px);hyphens:manual;-webkit-hyphens:manual}
+@media (max-width:760px){.topics .long b{font-size:clamp(16px,4.6vw,23px)}}
+/* three equal columns: the dividing hairline sits in the gap instead of
+   padding the 2nd and 3rd doors, so all three reels come out the same size */
+@media (min-width:861px){
+  .v3 .doors-grid.three{--dg:clamp(40px,5vw,88px);gap:var(--dg);grid-template-columns:repeat(3,minmax(0,1fr))}
+  .v3 .doors-grid.three .door2{position:relative;display:flex;flex-direction:column}
+  .v3 .doors-grid.three .door2 + .door2{border-left:0;border-top:0;margin-top:0;padding-left:0}
+  .v3 .doors-grid.three .door2 + .door2::before{content:"";position:absolute;top:0;bottom:0;
+    left:calc(var(--dg) / -2);border-left:1px solid var(--line-th)}
+  .v3 .doors-grid.three .door-title{font-size:clamp(36px,4.1vw,76px);white-space:nowrap}
+}
+
+/* ---- v3: the drawn cursor, with a safety net ----
+   The page draws its own cursor (ring + dot) and hides the system one. When
+   the drawn one failed to run, the mouse simply vanished. Now the system
+   pointer is only hidden once the drawn cursor has actually followed the
+   mouse (main.js adds .cursor-on to <html>); until then, or if it never
+   runs, the normal pointer stays. */
+html:not(.cursor-on) body.v3,
+html:not(.cursor-on) .v3 a,html:not(.cursor-on) .v3 button,html:not(.cursor-on) .v3 [role="button"],
+html:not(.cursor-on) .v3 .row,html:not(.cursor-on) .v3 .tile{cursor:auto}
+html:not(.cursor-on) .v3 a,html:not(.cursor-on) .v3 button{cursor:pointer}
+html:not(.cursor-on) #cursor,html.cursor-out #cursor{opacity:0}
+#cursor{transition:opacity .2s}
+
+/* ---- highlights never reach into the line above ----
+   An inline <mark> paints a box as tall as the font's whole content area,
+   which on a headline set at .95 line height is taller than the line itself:
+   the yellow of line two was painted over the descenders of line one
+   ("Nothing goes out" lost the tails of its g's). As an inline-block the
+   highlight gets its own height and the line box grows to hold it. Keep
+   highlighted phrases short: an inline-block does not wrap. */
+.v3 mark{display:inline-block;line-height:1;padding:.06em .14em .12em;margin:.06em 0 0;
+  box-decoration-break:slice;-webkit-box-decoration-break:slice}
+.v3 .sol-rule{line-height:1}
+/* the two-door version (Solutions page) gets the same treatment: equal
+   columns, the hairline in the gap, reels the same size on one baseline */
+@media (min-width:761px){
+  .v3 .doors-grid:not(.three){--dg:clamp(40px,5vw,88px);gap:var(--dg)}
+  .v3 .doors-grid:not(.three) .door2{position:relative;display:flex;flex-direction:column}
+  .v3 .doors-grid:not(.three) .door2 + .door2{border-left:0;padding-left:0}
+  .v3 .doors-grid:not(.three) .door2 + .door2::before{content:"";position:absolute;top:0;bottom:0;
+    left:calc(var(--dg) / -2);border-left:1px solid var(--line-th)}
+  .v3 .doors-grid:not(.three) .door-reel{margin-top:auto}
+  .v3 .doors-grid:not(.three) .door-lead{margin-bottom:clamp(20px,3vh,36px)}
+}
+
+/* the statement band is transparent so the 3D marks travel behind it; only
+   the blocks themselves are solid, so the text and logos stay legible */
+.v3 .statement{background:transparent}
+.v3 .topics li,.v3 .brands li{background:var(--bg)}
+.v3 .topics li:hover{background:var(--fg)}
+
+/* ---- language: EN / PT in the nav, the current one marked ---- */
+.lang-pick{display:inline-flex;align-items:center;gap:0;margin-left:clamp(6px,1vw,14px)}
+.lang-pick a{padding:2px 5px;opacity:.45;transition:opacity .25s}
+.lang-pick a + a{border-left:1px solid currentColor}
+.lang-pick a[aria-current="true"]{opacity:1}
+.lang-pick a:hover{opacity:1}
+/* no flash of English when the visitor chose Portuguese: the page stays
+   hidden until lang.js has swapped the text (and shows anyway after 1.2s
+   if that script never runs) */
+html.lang-pt:not(.lang-done) body{visibility:hidden;animation:langShow 0s 1.2s forwards}
+@keyframes langShow{to{visibility:visible}}
+/* the Portuguese lines run a character or two longer; one step down keeps
+   each of the three lines on one line */
+.lang-pt .st-title{font-size:clamp(38px,7.7vw,138px)}
+/* phones: four links plus EN / PT do not fit beside the name. Contact
+   leaves the bar there (the address closes every page) and the language
+   pick takes its place */
+@media (max-width:600px){
+  .v3 .nav .navlinks a[href^="mailto:"]{display:none}
+  .v3 .lang-pick{margin-left:2px}
+  .v3 .lang-pick a{padding:2px 4px}
+}
+/* home doors: transparent around them too, so the marks keep travelling
+   through the band; each door carries its own ground */
+.v3 .doors:not(.solid){background:transparent}
+.v3 .doors:not(.solid) .door2{background:var(--bg)}

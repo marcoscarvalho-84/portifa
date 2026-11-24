@@ -1,0 +1,563 @@
+{
+  "version": 1,
+  "projects": {
+    "solvefy": {
+      "meta": "B2B · SaaS · Product design · IA · Branding",
+      "eyebrow": "Case em destaque · Staff Product Designer / Product Design Lead · 2024–2026",
+      "summary": "Uma empresa de comunicação com duas décadas de história, renascida como ecossistema de tecnologia. Fiquei à frente de design e growth durante toda a mudança.",
+      "subprojects": {
+        "solv-1": {
+          "title": "O rebranding",
+          "stats": [
+            {
+              "value": "5 → 1",
+              "label": "marcas em um só ecossistema"
+            },
+            {
+              "value": "2",
+              "label": "eventos ao vivo"
+            },
+            {
+              "value": "1",
+              "label": "design system entregue"
+            }
+          ],
+          "blocks": {
+            "b6zl87ltg4qcc": {
+              "text": "A Solvefy nasceu da Ativos Capital, uma empresa construída ao longo de 20 anos. Coordenei o rebranding que pegou 5 marcas desconectadas, com mensagens inconsistentes, e transformou tudo em um único ecossistema de negócios integrado."
+            },
+            "bmzw7gf34up5h": {
+              "text": "Pesquisa primeiro. Entrevistas com stakeholders e análise de mercado deram base ao rebranding, e definimos as métricas que íamos acompanhar para provar que funcionou.\n\nUm ecossistema. Marca, trilhas de comunicação e estratégia de social unificadas em todas as submarcas, mais dois eventos ao vivo.\n\nUm sistema, não só um logo. Um design system entregue junto com a marca, orquestrando cada produto e ponto de contato numa mesma linguagem.\n\nFeito para vender também. Playbooks de vendas e eventos deram ao time comercial um caminho claro para vender o novo ecossistema."
+            }
+          }
+        },
+        "solv-2": {
+          "title": "O produto",
+          "stats": [
+            {
+              "value": "4",
+              "label": "produtos, um portfólio"
+            },
+            {
+              "value": "NPS ↑",
+              "label": "navegação e disparo mais fluidos"
+            }
+          ],
+          "blocks": {
+            "bez36ew9c7g7b": {
+              "text": "Reorganizei a forma como o portfólio de quatro produtos estava estruturado. O NPS subiu, e a navegação e o disparo de campanhas ficaram visivelmente mais fluidos para todos os times que usavam."
+            },
+            "bj794c6nz0onz": {
+              "text": "Quatro produtos, uma direção. Disparo Pro, Brasilfone, EasyCDP e Solvefy Cloud, trabalhando perto de tecnologia e operações.\n\nCraft de ponta a ponta. Arquitetura de informação, wireframes, protótipos de alta fidelidade e sistemas responsivos feitos para escalar, não peças avulsas.\n\nO NPS subiu. A navegação e o disparo de campanhas ficaram visivelmente mais fluidos para todos os times que usavam os produtos no dia a dia."
+            }
+          }
+        },
+        "solv-3": {
+          "title": "A IA",
+          "stats": [
+            {
+              "value": "IA nativa",
+              "label": "feito com IA, não ao redor dela"
+            },
+            {
+              "value": "Agents",
+              "label": "orquestração de IA lançada"
+            }
+          ],
+          "blocks": {
+            "b7tvy4888pvvs": {
+              "text": "Entreguei workflows de design orientados por IA enquanto a empresa lançava o Agents, seu produto de orquestração de IA. Design entregue com IA, não ao redor dela."
+            },
+            "bethqvvsyaicq": {
+              "text": "IA no processo. Workflows de design construídos e entregues sobre IA, rodando com Claude Code, MCPs e agentes customizados, encurtando os ciclos de entrega do time inteiro.\n\nIA no produto também. Enquanto eu trabalhava nisso, a Solvefy lançou o Agents, seu próprio produto de orquestração de IA para clientes.\n\nFora do slide. A diferença que importa: IA como algo com que eu construo todo dia, não uma linha num deck."
+            }
+          }
+        },
+        "solv-5": {
+          "title": "O motor de leads",
+          "stats": [
+            {
+              "value": "200 + 100",
+              "label": "meta mensal de leads"
+            },
+            {
+              "value": "Dia 1",
+              "label": "meta batida no primeiro uso"
+            }
+          ],
+          "blocks": {
+            "bv1q5v6y0i7iv": {
+              "text": "Um OKR claro: encontrar e qualificar leads rápido. Desenhei e construí a plataforma que fez isso, de ponta a ponta, nas mãos do time de vendas."
+            },
+            "bndg462nm9wgl": {
+              "text": "Workspaces por ICP. Cada produto e cada cliente ideal ganhou seu próprio workspace, para que uma prospecção não vazasse para a outra.\n\nBusca com contexto. A plataforma cruzava empresas pelo uso que fariam do que vendíamos, por CNAE, em todo o cadastro de empresas do Brasil, puxava os decisores e C-levels do LinkedIn e ranqueava cada lead numa única página por score de mercado.\n\nPronto para vender. Playbook, jornada de contato e a separação entre MQL e SQL já vinham embutidos, e uma API direta mandava os leads para o Spotter, a ferramenta que o time comercial já usava.\n\nSuperada no primeiro dia. A meta do mês, 200 leads para o produto A e 100 para o produto B, foi batida no primeiro dia de uso."
+            }
+          }
+        },
+        "solv-6": {
+          "title": "A pesquisa",
+          "stats": [
+            {
+              "value": "18%",
+              "label": "da receita mantida"
+            },
+            {
+              "value": "3",
+              "label": "grandes clientes retidos"
+            }
+          ],
+          "blocks": {
+            "bmh9715ie2o30": {
+              "text": "Trouxe a pesquisa para dentro do jeito como desenhávamos e entregávamos. Decisões baseadas em dor real e em dados de churn, não em opinião."
+            },
+            "bdo862o03sfvk": {
+              "text": "Começar pela dor. Pesquisa para achar onde o produto realmente machucava os clientes, não onde a gente supunha que machucava.\n\nChurn, depois quick wins. A análise de churn virou uma lista curta de correções que trouxe gente de volta.\n\nPLG para a experiência. Uma estratégia de product-led growth deu a direção para um produto e um CX melhores.\n\nSegurou a receita. O time que eu liderava entregou a pesquisa, os blueprints e as calls que melhoraram a usabilidade, e convenceu três grandes clientes, cerca de 18% da receita, a não sair."
+            }
+          }
+        },
+        "solv-4": {
+          "title": "O time",
+          "stats": [
+            {
+              "value": "7",
+              "label": "design e growth, um time"
+            },
+            {
+              "value": "WxD",
+              "label": "cultura operacional plantada"
+            }
+          ],
+          "blocks": {
+            "bqryihgq36rx1": {
+              "text": "Liderei um time de 7. Plantamos uma cultura de Winning by Design e uma troca de conhecimento mais forte, para que design e growth puxassem para os mesmos resultados de negócio."
+            },
+            "bxnjowpcrckul": {
+              "text": "Design e growth, alinhados. Um time de 7 puxando para os mesmos resultados de negócio, em vez de duas agendas separadas.\n\nWinning by Design. Plantado como a cultura operacional do time, não como um workshop isolado.\n\nConhecimento que circula. Mais troca de conhecimento, para que o trabalho do time se acumulasse em vez de recomeçar do zero toda vez."
+            }
+          }
+        }
+      }
+    },
+    "remessa": {
+      "meta": "Product Design Lead · Growth em fintech",
+      "eyebrow": "Case · Product Design Lead, Growth · Mar–Nov 2022 · Remoto",
+      "summary": "Product Design Lead de Growth: um time de cinco e um escopo que ia além do produto logado. Canais e aquisição, tocados lado a lado com marketing, e o site sob o meu time.",
+      "subprojects": {
+        "rem-1": {
+          "title": "A pergunta",
+          "stats": [
+            {
+              "value": "1",
+              "label": "pergunta com que todo visitante chega"
+            },
+            {
+              "value": "8",
+              "label": "simuladores respondendo a ela"
+            }
+          ],
+          "blocks": {
+            "bmsoyro2117dab": {
+              "text": "Quem entra num site de pagamentos internacionais chega com uma pergunta só: quanto eu recebo, de fato? Nós respondíamos oito vezes."
+            },
+            "bmsoyro210n5aa": {
+              "text": "Uma pergunta. Todo visitante, enviando ou recebendo, está perguntando a mesma coisa: o que chega do outro lado.\n\nOito respostas. Oito simuladores de câmbio espalhados pelo site e pelo funil, cada um produzindo sua própria versão da verdade."
+            }
+          }
+        },
+        "rem-2": {
+          "title": "O diagnóstico",
+          "stats": [
+            {
+              "value": "8",
+              "label": "stacks, um simulador em cada"
+            },
+            {
+              "value": "Paradigma",
+              "label": "não um problema de inconsistência"
+            }
+          ],
+          "blocks": {
+            "bmsoyro21lq9kq": {
+              "text": "Oito simuladores, cada um numa stack diferente. Isso não é um problema de inconsistência. É um problema de paradigma, e não se resolve redesenhando oito telas."
+            },
+            "bmsoyro21ardlt": {
+              "text": "Modelado de dentro para fora. O produto tinha sido moldado em torno das nossas fronteiras internas de tecnologia, e não em torno da pergunta do usuário.\n\nPor que redesign era a ferramenta errada. Repaginar oito telas manteria oito fontes de verdade. O que tinha que mudar era o modelo, não a pintura."
+            }
+          }
+        },
+        "rem-3": {
+          "title": "A decisão",
+          "stats": [
+            {
+              "value": "8 → 3",
+              "label": "simuladores"
+            },
+            {
+              "value": "Não 1",
+              "label": "o limite era técnico, e foi dito"
+            }
+          ],
+          "blocks": {
+            "bmsoyro219mxzx": {
+              "text": "Levamos de oito para três. Não para um, e o motivo vale ser dito com todas as letras: tecnologia, não design. As stacks por baixo não podiam ser unificadas além disso."
+            },
+            "bmsoyro213i31l": {
+              "text": "De oito para três. Consolidados em torno da pergunta do usuário, não do nosso organograma.\n\nO limite, em voz alta. Um era a resposta certa e três era a resposta honesta: juntar as stacks restantes significava uma reconstrução que o negócio não ia financiar. O design parou onde a tecnologia traçou a linha, e nós dissemos isso."
+            }
+          }
+        },
+        "rem-4": {
+          "title": "O que ficou",
+          "stats": [
+            {
+              "value": "1",
+              "label": "linguagem entre design e marketing"
+            }
+          ],
+          "blocks": {
+            "bmsoyro21tyqlw": {
+              "text": "O que ficou não foi a contagem. Foi o acordo, entre design e marketing, sobre como falamos com esse público e o que cada produto precisa mostrar para converter."
+            },
+            "bmsoyro218kacy": {
+              "text": "Uma voz. Design e marketing com a mesma definição de público e a mesma linguagem para dinheiro que cruza fronteira.\n\nUma função por superfície. O que cada produto precisa mostrar para converter, combinado e documentado.\n\nPor que se sustenta. Sem esse alinhamento, os simuladores se multiplicam de novo no momento em que um canal novo precisa de um."
+            }
+          }
+        }
+      }
+    },
+    "leads2b": {
+      "summary": "A estrutura que durou mais do que eu. Um software de sales engagement redesenhado em torno do seu objeto real, a cadência, e uma divisão estrutural que ainda guia o produto hoje, quatro anos depois.",
+      "subprojects": {
+        "l2b-1": {
+          "title": "O objeto certo",
+          "stats": [
+            {
+              "value": "Cadência",
+              "label": "o objeto real do produto, não uma tela"
+            }
+          ],
+          "blocks": {
+            "bmsoyro21ue674": {
+              "text": "O Leads2b é um software de sales engagement. O objeto central dele não é uma tela. É a cadência: a sequência de contatos que um vendedor monta, executa e refaz."
+            },
+            "bmsoyro218sz3z": {
+              "text": "Home, fluxo, cadência. Redesenhei a home, o fluxo e o jeito como uma cadência é montada e remontada.\n\nFeito para ser refeito. Uma cadência nunca está pronta. Os vendedores a reconstroem o tempo todo, então a própria construção tinha que ser a interface."
+            }
+          }
+        },
+        "l2b-2": {
+          "title": "A divisão",
+          "stats": [
+            {
+              "value": "4 anos",
+              "label": "a divisão ainda guia o produto"
+            }
+          ],
+          "blocks": {
+            "bmsoyro216dqm3": {
+              "text": "A divisão estrutural que eu fiz ainda guia o produto hoje, quatro anos depois."
+            },
+            "bmsoyro21n1eaa": {
+              "text": "Dá para verificar de fora. Qualquer pessoa pode abrir o Leads2b hoje e ver a estrutura. Não tem número para aceitar na fé: a prova é o produto no ar."
+            }
+          }
+        },
+        "l2b-3": {
+          "title": "O time",
+          "stats": [
+            {
+              "value": "5",
+              "label": "conteúdo e design, um time"
+            }
+          ],
+          "blocks": {
+            "bmsoyro211s93w": {
+              "text": "Um time de cinco, misturando conteúdo e design. Numa ferramenta pela qual o vendedor fala, as palavras são produto, não decoração."
+            },
+            "bmsoyro21nfi54": {
+              "text": "Conteúdo é produto. Uma cadência é feita de texto: as mensagens são o mecanismo, não o texto em volta dele.\n\nUm ofício, dois materiais. Liderar redatores e designers juntos não foi acúmulo de funções. Para esse produto, era a composição certa."
+            }
+          }
+        },
+        "l2b-4": {
+          "title": "O que veio depois",
+          "blocks": {
+            "bmsoyro21hsqy3": {
+              "text": "O churn estabilizou enquanto isso se assentava. Não vou dizer que foi a única causa. A estrutura é a parte que ainda consigo apontar, quatro anos depois."
+            }
+          }
+        }
+      }
+    },
+    "136071709": {
+      "meta": "Produto · Dados",
+      "eyebrow": "Painel de atendimento ao cliente · Nissan · 2022",
+      "summary": "Um painel de atendimento ao cliente para a Nissan. Product design e UI/UX para uma ferramenta digital interna."
+    },
+    "135764741": {
+      "meta": "UX · Intranet global",
+      "summary": "Uma intranet global para a Huge, desenhada para conectar e dar suporte aos times da agência no mundo todo. UX design de Marcos Carvalho, Nathalie Rosie Taylor e Rachael Feinman."
+    },
+    "118534117": {
+      "meta": "Game UX · Direção de arte · NY",
+      "eyebrow": "Jogo de cartas mobile · UX/UI · Direção de arte · 2021",
+      "summary": "Game design de UX/UI e direção de arte para o Evil Apples, um jogo de cartas mobile, do design de interação à ilustração."
+    },
+    "76147897": {
+      "meta": "UX · UI · Marca",
+      "eyebrow": "Redesign do site · Bodebrown · 2019",
+      "summary": "Um site novo para a Bodebrown, cervejaria artesanal de Curitiba, construído em torno de conteúdo, ilustrações e ícones feitos sob medida."
+    },
+    "209221077": {
+      "meta": "Evento global · Marca",
+      "eyebrow": "Identidade de marca de evento · dLocal · 2024",
+      "summary": "O Connect é um evento mundial da dLocal, empresa global de pagamentos, que reúne empresas líderes e executivos para trocar ideias sobre como ampliar o acesso a pagamentos na África, na Ásia e na América Latina. A marca foi construída para funcionar como um logo estruturado e para se desmontar em formas usadas como malha gráfica.",
+      "blocks": {
+        "bch3p8hiz1ugw": {
+          "text": "O Connect é um evento criado pela dLocal, uma empresa global de pagamentos. Em 2023, empresas líderes no mundo, executivos de alto nível e outras entidades se reuniram para trocar ideias sobre como criar acesso fácil a pagamentos em mercados como África, Ásia e América Latina, apesar de dinâmicas de mercado bem desafiadoras."
+        },
+        "boiq9pb1zkl8k": {
+          "text": "Pensando no evento e nas ideias que circulam ali, quisemos construir uma marca que funcionasse de forma estruturada como logo e que também pudesse ser desmontada, usando as formas como malha gráfica. Distribuímos isso pelos mais diversos materiais."
+        },
+        "ba0jo4fit7ldt": {
+          "text": "Trabalhando do Brasil, coordenamos a produção junto com fornecedores locais em Punta del Este (Uruguai), Singapura e Londres (Reino Unido)."
+        },
+        "bjd2bb7jrcq85": {
+          "alt": "A imagem pode conter: bandeira"
+        },
+        "bl0q6vbass3dn": {
+          "alt": "A imagem pode conter: céu e captura de tela"
+        },
+        "b66x6ui5jjy9g": {
+          "alt": "A imagem pode conter: captura de tela, ilustração e cartum"
+        },
+        "bcv0tyw3xdmvb": {
+          "alt": "A imagem pode conter: gráficos vetoriais"
+        },
+        "b1mhsx802svbh": {
+          "alt": "A imagem pode conter: captura de tela"
+        },
+        "bptbzvf8ak4hp": {
+          "alt": "A imagem pode conter: abstrato, captura de tela e cores vivas"
+        },
+        "bzmsk703d4wf5": {
+          "alt": "A imagem pode conter: ilustração e círculo"
+        },
+        "bioearihozmdw": {
+          "alt": "A imagem pode conter: gráficos vetoriais"
+        },
+        "bxtxzz6bgzric": {
+          "alt": "A imagem pode conter: pessoa, roupa e ambiente interno"
+        },
+        "b20np5e7b64ew": {
+          "alt": "A imagem pode conter: captura de tela"
+        },
+        "byne45qcc5j0u": {
+          "alt": "A imagem pode conter: cartum, captura de tela e gráficos vetoriais"
+        },
+        "buzil0qbapofe": {
+          "alt": "A imagem pode conter: desenho, ilustração e pintura"
+        },
+        "bk36no1rxjfa5": {
+          "alt": "A imagem pode conter: captura de tela, pôster e mapa"
+        },
+        "bwui84huhodh2": {
+          "alt": "A imagem pode conter: pôster, captura de tela e texto manuscrito"
+        },
+        "b3oudtdpno3nn": {
+          "alt": "A imagem pode conter: chão, placa e texto manuscrito"
+        },
+        "brcmf3k57zg2n": {
+          "alt": "A imagem pode conter: farol"
+        },
+        "bqu5pn1xpt63i": {
+          "alt": "A imagem pode conter: ilustração"
+        },
+        "bxowb3kvs0fug": {
+          "alt": "A imagem pode conter: captura de tela e cartum"
+        },
+        "bqf0mralvnkxk": {
+          "alt": "A imagem pode conter: ambiente interno, divã e sofá"
+        },
+        "bjkz1vl8wykbm": {
+          "alt": "A imagem pode conter: pessoa, roupa e rosto humano"
+        },
+        "bfpcrajxzbi97": {
+          "alt": "A imagem pode conter: cartum e pôster"
+        }
+      }
+    },
+    "250632349": {
+      "meta": "Founder · Vestuário",
+      "eyebrow": "Design de vestuário · Lerdo · 2026",
+      "summary": "Design de vestuário e roupa esportiva para a Lerdo, construído em torno de uma identidade visual rosa neon."
+    },
+    "225576979": {
+      "meta": "Branding · Identidade visual",
+      "eyebrow": "Marca e identidade visual · void · 2025",
+      "summary": "A Void é a primeira fabricante de cápsulas de flutuação do Brasil, pensada para quem busca alívio, silêncio e reconexão. Dentro delas, em água morna com sal de Epsom, o corpo flutua livre de estímulos e da gravidade. Engenharia, arquitetura e design juntos para um descanso profundo.",
+      "blocks": {
+        "b091pgujr6px1": {
+          "alt": "A imagem pode conter: rosto humano"
+        },
+        "bprckzz5p79ws": {
+          "alt": "A imagem pode conter: captura de tela"
+        },
+        "bywerrknbu8r2": {
+          "alt": "A imagem pode conter: ilustração"
+        },
+        "bornikhm25ic4": {
+          "alt": "A imagem pode conter: captura de tela"
+        },
+        "baj4cvo0eq5fr": {
+          "alt": "A imagem pode conter: natação e captura de tela"
+        },
+        "b5hdzybskb636": {
+          "alt": "A imagem pode conter: captura de tela"
+        },
+        "b7rso0vyyxr7f": {
+          "alt": "A imagem pode conter: captura de tela"
+        },
+        "bemdp5pv2z0n4": {
+          "alt": "A imagem pode conter: captura de tela e ambiente interno"
+        },
+        "b7yqybt49umy7": {
+          "alt": "A imagem pode conter: nudez e mão"
+        },
+        "b0zhg1de5uh07": {
+          "alt": "A imagem pode conter: celular"
+        },
+        "bz8uihagk8vrm": {
+          "alt": "A imagem pode conter: arte e captura de tela"
+        },
+        "bsryo7vyjws47": {
+          "alt": "A imagem pode conter: captura de tela"
+        },
+        "bjovwkqp92zdx": {
+          "alt": "A imagem pode conter: ambiente externo, prédio e porta"
+        },
+        "bdckllt9rklld": {
+          "alt": "A imagem pode conter: parede, pia e ambiente interno"
+        },
+        "bafqb72u96x22": {
+          "alt": "A imagem pode conter: parede e ambiente interno"
+        },
+        "b66po3g1evtem": {
+          "alt": "A imagem pode conter: parede, mesa e vaso"
+        },
+        "bb618w77yntuu": {
+          "alt": "A imagem pode conter: ambiente interno"
+        },
+        "blojcn772r2jh": {
+          "alt": "A imagem pode conter: captura de tela e cartum"
+        },
+        "bcds3hzii52b4": {
+          "alt": "A imagem pode conter: arte"
+        },
+        "bn8739vkil9z7": {
+          "alt": "A imagem pode conter: cartum, esboço e desenho"
+        },
+        "bjq3svtjhqqqe": {
+          "alt": "A imagem pode conter: pessoa, roupa e homem"
+        },
+        "bjvmc2q3il1pq": {
+          "alt": "A imagem pode conter: parede, porta e ambiente interno"
+        }
+      }
+    },
+    "54196333": {
+      "meta": "Branding · Selo musical",
+      "eyebrow": "Branding de selo musical · Feel.U · 2017",
+      "summary": "Identidade de marca para a Feel.U, selo musical e coletivo de artistas focado em música eletrônica: dançante, introspectiva e experimental. O logotipo é formado por micro filamentos que se expandem e se contraem com o som do ambiente, gerando uma marca diferente para cada situação. Junto com ele, a plataforma Brand Maker cria formas a partir de ondas sonoras captadas pelo microfone.",
+      "blocks": {
+        "b9ast3cu9vgjm": {
+          "alt": "A imagem pode conter: cartum"
+        }
+      }
+    },
+    "233337759": {
+      "meta": "Marca · Editorial",
+      "eyebrow": "Identidade visual e editorial · 2025",
+      "blocks": {
+        "b8snyzhsiy17v": {
+          "alt": "A imagem pode conter: cartum, ilustração e tipografia"
+        },
+        "bp3iwzfvuygf9": {
+          "alt": "A imagem pode conter: prédio, porta e ambiente externo"
+        },
+        "b8lntijadffb9": {
+          "alt": "A imagem pode conter: cartum e prato"
+        },
+        "bsk3u26uq1v4n": {
+          "alt": "A imagem pode conter: fast food, comida e cardápio"
+        },
+        "bn9euryblzttq": {
+          "alt": "A imagem pode conter: fast food, comida e sanduíche"
+        },
+        "bkwipw1y9fdrn": {
+          "alt": "A imagem pode conter: cartum, desenho e texto manuscrito"
+        },
+        "b8ivmjdvuixk0": {
+          "alt": "A imagem pode conter: fast food"
+        },
+        "bo1p94skbf3w2": {
+          "alt": "A imagem pode conter: fast food, comida e sanduíche"
+        },
+        "bygo7bnjktxga": {
+          "alt": "A imagem pode conter: cartum, desenho e esboço"
+        },
+        "bawcgyggqlrya": {
+          "alt": "A imagem pode conter: janela, cardápio e livro"
+        },
+        "b7r1hbggd7iri": {
+          "alt": "A imagem pode conter: comida, fast food e cardápio"
+        },
+        "bv5qp8hj0uff8": {
+          "alt": "A imagem pode conter: desenho, esboço e ilustração"
+        },
+        "b5eiyyb964xn5": {
+          "alt": "A imagem pode conter: céu, ambiente externo e placa"
+        },
+        "beb8zo1m751i7": {
+          "alt": "A imagem pode conter: comida, fast food e lanche"
+        },
+        "bketr35q4jbsd": {
+          "alt": "A imagem pode conter: cartum, desenho e pôster"
+        },
+        "bc6udjppd1qpr": {
+          "alt": "A imagem pode conter: pessoa, parede e ambiente interno"
+        }
+      }
+    },
+    "135014753": {
+      "meta": "Founder · Vestuário de ciclismo",
+      "eyebrow": "Camisa de ciclismo · Lerdo · 2022",
+      "summary": "Uma camisa de ciclismo e gráficos de vestuário construídos em torno de design de padronagem. Direção criativa e de arte de Marcos Carvalho, com fotografia de Ann Schwaner e produção de Camila Kogut e Lucia Malucelli.",
+      "blocks": {
+        "bfv77j0rej7ev": {
+          "text": "Você pode comprar clicando aqui (https://lerdo.cc/vertigem)"
+        }
+      }
+    },
+    "120517563": {
+      "meta": "Capa de disco · Videoclipe",
+      "eyebrow": "Capa de disco e videoclipe · Mononoke · 2021",
+      "summary": "Arte de capa para Progresso, da banda punk de crust/screamo Mononoke, um disco cujas letras confrontam uma sociedade que comprou a ideia de um progresso mecânico insustentável. O trabalho inclui a capa do disco, a capa do single Raymond e um videoclipe da faixa, com efeitos de texto feitos de forma analógica, projetados em tecido antes da aplicação digital.",
+      "blocks": {
+        "bgkt9e4r06w6n": {
+          "alt": "A imagem pode conter: cartum, ilustração e arte"
+        }
+      }
+    },
+    "135486111": {
+      "meta": "Capa e arte",
+      "eyebrow": "Capa de disco · Música eletrônica · 2022",
+      "summary": "Capa e direção de arte para Tristes Trópicos, um lançamento brasileiro de música eletrônica com um registro tropical e politicamente carregado.",
+      "blocks": {
+        "bidi9zzg3lf5k": {
+          "alt": "A imagem pode conter: captura de tela, desenho e cartum"
+        }
+      }
+    }
+  }
+}

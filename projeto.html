@@ -34,6 +34,12 @@ img{max-width:100%;display:block}
 .nav a{text-decoration:none}
 .nav .back{display:inline-flex;align-items:center;gap:8px}
 .nav .back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+/* v3: EN / PT beside the back link */
+.nav .navr{display:inline-flex;align-items:center;gap:18px}
+.lang-pick{display:inline-flex;align-items:center}
+.lang-pick a{padding:2px 5px;opacity:.45;transition:opacity .25s}
+.lang-pick a + a{border-left:1px solid currentColor}
+.lang-pick a[aria-current="true"],.lang-pick a:hover{opacity:1}
 
 /* hero */
 .hero{padding:26vh 0 8vh}
@@ -53,6 +59,19 @@ img{max-width:100%;display:block}
 .blocks.wide{max-width:var(--maxw)}
 .b-text{font-weight:400;font-size:clamp(18px,1.7vw,23px);line-height:1.55;margin:0 auto 1.4em;max-width:64ch}
 .b-text:last-child{margin-bottom:0}
+/* v3 short read */
+.is-short:not(.is-open) .b-text.more{display:none}
+.chblocks.is-short > .b-text:first-child{font-size:clamp(20px,2vw,28px);line-height:1.42;font-weight:500}
+/* sized in the lead paragraph's own ch, so the hairline spans the same measure */
+.readmore{display:flex;align-items:center;gap:10px;margin:3.4vh auto 0;max-width:64ch;width:100%;
+  background:none;border:0;border-top:1px solid var(--line);padding:16px 0 0;cursor:pointer;
+  font:inherit;font-size:clamp(20px,2vw,28px);color:var(--muted);text-align:left}
+.readmore > span{font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.readmore .rm-n{font-variant-numeric:tabular-nums;opacity:.6}
+.readmore .rm-n::before{content:"+"}
+.is-open > .readmore .rm-n{display:none}
+.readmore:hover{color:var(--fg)}
+.readmore:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
 /* images in a case stack as a tight visual sequence, not spaced-out cards;
    text/embeds get a little more air around them (see below) */
 .b-fig{margin:0}
@@ -223,7 +242,7 @@ img{max-width:100%;display:block}
 
 /* page transition wipe — matches the cinematic nav on index/solvefy (CSS only) */
 #page-transition{position:fixed;inset:0;z-index:300;background:var(--fg);pointer-events:none;
-  clip-path:inset(100% 0 0 0);transition:clip-path .6s cubic-bezier(.76,0,.24,1)}
+  clip-path:inset(100% 0 0 0);transition:clip-path .38s cubic-bezier(.76,0,.24,1)}
 #page-transition.cover{clip-path:inset(0 0 0 0)}
 #page-transition.reveal{clip-path:inset(0 0 100% 0)}
 @media (prefers-reduced-motion:reduce){#page-transition{display:none}}
@@ -233,16 +252,17 @@ img{max-width:100%;display:block}
   .chapter .chnum{font-size:clamp(38px,11vw,64px)}
 }
 </style>
+<script>try{var l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('site-lang')||(/^pt/i.test(navigator.language||'')?'pt':'en');if(l==='pt')document.documentElement.classList.add('lang-pt')}catch(e){}</script>
 </head>
-<body>
+<body class="v3">
 <div id="grain"></div>
 <div id="page-transition"></div>
 
 <!-- lightbox for the chapter galleries -->
 <div id="lightbox" aria-hidden="true">
-  <button class="lb-close" aria-label="Close">✕</button>
-  <button class="lb-nav lb-prev" aria-label="Previous">‹</button>
-  <button class="lb-nav lb-next" aria-label="Next">›</button>
+  <button class="lb-close" aria-label="Close" data-pt-label="Fechar">✕</button>
+  <button class="lb-nav lb-prev" aria-label="Previous" data-pt-label="Anterior">‹</button>
+  <button class="lb-nav lb-next" aria-label="Next" data-pt-label="Próxima">›</button>
   <figure class="lb-stage"><img id="lb-img" src="" alt=""><figcaption id="lb-cap"></figcaption></figure>
 </div>
 
@@ -250,11 +270,12 @@ img{max-width:100%;display:block}
   <a href="index.html" data-back>Marcos Carvalho</a>
   <!-- destination is set in init(): the work split into two catalog pages,
        and a case belongs to whichever one lists it -->
-  <a href="product.html" class="back" id="backlink" data-back><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> <span>Work</span></a>
+  <span class="navr"><a href="product.html" class="back" id="backlink" data-back><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg> <span>Work</span></a><span class="lang-pick" role="group" aria-label="Language"><a href="?lang=en" data-lang-pick="en" hreflang="en" lang="en">EN</a><a href="?lang=pt" data-lang-pick="pt" hreflang="pt-BR" lang="pt-BR">PT</a></span></span>
 </nav>
 
 <main id="app"></main>
 
+<script src="js/lang.js?v=310"></script>
 <script>
 'use strict';
 
@@ -275,7 +296,10 @@ async function loadData(){
   const order = [], map = new Map();
   (stat && Array.isArray(stat.projects) ? stat.projects : []).forEach(p => { map.set(p.id, p); order.push(p.id); });
   (ls && Array.isArray(ls.projects) ? ls.projects : []).forEach(p => { if (!map.has(p.id)) order.push(p.id); map.set(p.id, p); });
-  return { projects: order.map(i => map.get(i)) };
+  const out = { projects: order.map(i => map.get(i)) };
+  /* v3: Portuguese case content from data/projects.pt.json (lang.js) */
+  if (window.__ptFetch && window.__ptMerge) window.__ptMerge(out, await window.__ptFetch());
+  return out;
 }
 const esc = s => (s || '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
@@ -374,14 +398,14 @@ function renderFilm(p){
   if (!id) return null;
   const sec = document.createElement('section');
   sec.className = 'film wrap rv';
-  const label = p.videoCase.label || 'Video case';
+  const label = p.videoCase.label || (window.__t||(x=>x))('Video case');
   sec.innerHTML = `<div class="film-frame" data-yt="${esc(id)}">
       <img class="film-still" src="https://i.ytimg.com/vi/${esc(id)}/maxresdefault.jpg" alt="" decoding="async">
       <button class="film-play" type="button" aria-label="Play the video case: ${esc(p.title || '')}">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
       </button>
     </div>
-    <div class="film-cap"><span>${esc(label)}</span><a href="https://www.youtube.com/watch?v=${esc(id)}" target="_blank" rel="noopener">Watch on YouTube ↗</a></div>`;
+    <div class="film-cap"><span>${esc(label)}</span><a href="https://www.youtube.com/watch?v=${esc(id)}" target="_blank" rel="noopener">${(window.__t||(x=>x))('Watch on YouTube ↗')}</a></div>`;
   /* YouTube has no maxres still for some uploads; its hq still always exists */
   const still = sec.querySelector('.film-still');
   still.addEventListener('load', () => {
@@ -411,7 +435,7 @@ function setupFilm(root){
     });
     iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube-nocookie.com/embed/${id}?${q}`;
-    iframe.title = 'Video case';
+    iframe.title = (window.__t||(x=>x))('Video case');
     iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
     iframe.allowFullscreen = true;
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
@@ -446,7 +470,7 @@ function setupFilm(root){
     if (back){
       const craft = !!project.secondary;
       back.href = craft ? 'craft.html' : 'product.html';
-      back.querySelector('span').textContent = craft ? 'Craft' : 'Product';
+      back.querySelector('span').textContent = (window.__t||(x=>x))(craft ? 'Craft' : 'Product');
     }
     render(project);
   }
@@ -576,6 +600,29 @@ function renderBlocksInto(container, blocks){
   }
 }
 
+/* ---------- v3: short read ----------
+   Each chapter leads with its first paragraph; the rest waits behind
+   "Read more". The CMS text is untouched — this only decides what shows
+   before you ask for it. */
+function shorten(container){
+  const paras = [...container.querySelectorAll(':scope > .b-text')];
+  if (paras.length < 2) return;
+  paras.slice(1).forEach(el => el.classList.add('more'));
+  container.classList.add('is-short');
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'readmore';
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = '<span class="rm-t">' + (window.__t||(x=>x))('Read more') + '</span> <span class="rm-n">' + (paras.length - 1) + '</span>';
+  btn.addEventListener('click', () => {
+    const open = container.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.querySelector('.rm-t').textContent = (window.__t||(x=>x))(open ? 'Read less' : 'Read more');
+    container.querySelectorAll('.b-text.more').forEach(el => el.classList.add('in'));
+  });
+  container.appendChild(btn);
+}
+
 /* ---------- render the whole case ---------- */
 function render(p){
   document.title = (p.title || 'Case') + ' — Marcos Carvalho';
@@ -593,7 +640,7 @@ function render(p){
     ${p.summary ? `<p class="lead rv">${esc(p.summary)}</p>` : ''}
     ${(tools || p.behanceUrl) ? `<div class="casemeta rv">
       ${tools ? `<span class="tools">${esc(tools)}</span>` : ''}
-      ${p.behanceUrl ? `<a class="behance" href="${esc(p.behanceUrl)}" target="_blank" rel="noopener">View on Behance ↗</a>` : ''}
+      ${p.behanceUrl ? `<a class="behance" href="${esc(p.behanceUrl)}" target="_blank" rel="noopener">${(window.__t||(x=>x))('View on Behance ↗')}</a>` : ''}
     </div>` : ''}
   </div>`;
   frag.appendChild(hero);
@@ -607,6 +654,7 @@ function render(p){
     const ov = document.createElement('section');
     ov.className = 'blocks wrap';
     renderBlocksInto(ov, p.blocks);
+    shorten(ov);
     frag.appendChild(ov);
   }
 
@@ -646,6 +694,7 @@ function render(p){
       const blk = document.createElement('div');
       blk.className = 'chblocks';
       renderBlocksInto(blk, textBlocks);
+      shorten(blk);
       inner.appendChild(blk);
 
       // horizontal image gallery (scroll / arrows / drag), not a vertical stack
@@ -663,7 +712,7 @@ function render(p){
         });
         wrap.appendChild(track);
         wrap.insertAdjacentHTML('beforeend',
-          '<button class="gnav gprev" aria-label="Anterior">‹</button><button class="gnav gnext" aria-label="Próximo">›</button>');
+          '<button class="gnav gprev" aria-label="' + (window.__t||(x=>x))('Previous') + '">‹</button><button class="gnav gnext" aria-label="' + (window.__t||(x=>x))('Next') + '">›</button>');
         inner.appendChild(wrap);
       }
       sec.appendChild(inner);
@@ -686,7 +735,7 @@ function render(p){
   if (others.length){
     const mw = document.createElement('section');
     mw.className = 'morework wrap';
-    mw.innerHTML = `<div class="mw-label rv">All projects</div>`;
+    mw.innerHTML = `<div class="mw-label rv">${(window.__t||(x=>x))('All projects')}</div>`;
     const list = document.createElement('div');
     list.className = 'mw-list';
     others.forEach(o => {
@@ -706,7 +755,7 @@ function render(p){
   const backHref = p.secondary ? 'craft.html' : 'product.html';
   const backName = p.secondary ? 'craft' : 'product work';
   foot.innerHTML = `<div class="wrap">
-    <a class="home" href="${backHref}" data-back>Back to ${backName} <span class="arrow">→</span></a>
+    <a class="home" href="${backHref}" data-back>${(window.__t||(x=>x))('Back to')} ${(window.__t||(x=>x))(backName)} <span class="arrow">→</span></a>
     <div class="meta">Marcos Carvalho — Product Design Lead · AI native</div>
   </div>`;
   frag.appendChild(foot);
@@ -873,7 +922,7 @@ function setupReveals(){
     e.preventDefault();
     sessionStorage.setItem('pt-arrive', '1');
     ov.classList.remove('reveal'); ov.classList.add('cover');
-    setTimeout(() => { location.href = href; }, 560);
+    setTimeout(() => { location.href = href; }, 380);
   });
 })();
 </script>

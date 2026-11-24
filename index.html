@@ -3,251 +3,191 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Marcos Carvalho — Product Design Lead &amp; AI native Designer</title>
+<title data-pt="Marcos Carvalho · Product Design Lead e designer AI native">Marcos Carvalho — Product Design Lead &amp; AI native Designer</title>
 <meta name="description" content="Marcos Carvalho, Product Design Lead and AI native Designer. Founder of CEROL. Fourteen years turning complex systems into products people use." />
 <meta property="og:title" content="Marcos Carvalho — Product Design Lead & AI native Designer" />
-<meta property="og:description" content="Fourteen years turning complex systems into products people use. Now designing and building with AI." />
+<meta property="og:description" content="I design products and build the systems they live in. Now with AI." />
 <meta property="og:url" content="https://marcoscarvalho.work/" />
 <link rel="canonical" href="https://marcoscarvalho.work/" />
 <link rel="icon" href="assets/cerol/void.svg" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="image" href="assets/hero/poster-desktop.webp" media="(min-aspect-ratio: 4/5)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero/poster-mobile.webp" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
 <link rel="preload" as="font" href="fonts/Pacaembu-Regular.woff2" type="font/woff2" crossorigin>
 <link rel="preload" as="font" href="fonts/Pacaembu-Bold.woff2" type="font/woff2" crossorigin>
 <link rel="preload" as="font" href="fonts/dTJakob_Rg.woff2" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/main.css?v=89" />
+<script>try{var l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('site-lang')||(/^pt/i.test(navigator.language||'')?'pt':'en');if(l==='pt')document.documentElement.classList.add('lang-pt')}catch(e){}</script>
+<link rel="stylesheet" href="css/main.css?v=314" />
 </head>
-<body>
+<body class="v3">
 
-  <!-- ============ LOADER ============ -->
-  <div id="loader">
-    <div class="pct">0</div>
-    <div class="wordmark">MARCOS CARVALHO</div>
-  </div>
-  <div id="loader-wipe"></div>
+  <!-- v3: no loader and no opening montage. The page is there on the first
+       paint; the hero shows a still of the 3D mark and the live canvas fades
+       in over it as soon as the mark is built (see scene.js, .gl-ready). -->
 
-  <!-- ============ FIXED 3D + GRAIN ============ -->
   <canvas id="gl"></canvas>
   <div id="grain"></div>
 
-  <!-- ============ HERO INTRO MONTAGE (Huge introFastImages) ============ -->
-  <div id="hero-montage" aria-hidden="true">
-    <figure class="sym"><img src="assets/cerol/sun.svg" alt=""></figure>
-    <figure class="sym"><img src="assets/cerol/urchin.svg" alt=""></figure>
-    <figure><img src="assets/montage/120517563-37.webp" alt=""></figure>
-    <figure><img src="assets/montage/135486111-07.webp" alt=""></figure>
-    <figure><img src="assets/montage/250632349-15.webp" alt=""></figure>
-    <figure><img src="assets/montage/136071709-cover.webp" alt=""></figure>
-    <figure><img src="assets/montage/135764741-cover.webp" alt=""></figure>
-    <figure><img src="assets/montage/118534117-cover.webp" alt=""></figure>
-    <figure><img src="assets/montage/209221077-03.webp" alt=""></figure>
-    <figure><img src="assets/montage/54196333-04.webp" alt=""></figure>
-    <figure><img src="assets/montage/250632349-23.webp" alt=""></figure>
-    <figure><img src="assets/montage/120517563-23.webp" alt=""></figure>
-    <figure><img src="assets/montage/135486111-03.webp" alt=""></figure>
-  </div>
-
-  <!-- ============ NAV ============ -->
-  <!-- starts hidden in the markup so the wordmark never flashes over the hero
-       before main.js runs, and so its reveal doesn't play against the loader -->
-  <nav class="nav nav-mask nav-hidden" id="nav">
+  <nav class="nav nav-mask" id="nav">
     <a class="brand" href="index.html"><span>Marcos</span> <span>Carvalho</span></a>
-    <!-- the site is three pages now, so the bar has to carry the way in.
-         nav-mask hides only the wordmark over the hero (the hero already
-         spells the name) — the links stay reachable from the first pixel. -->
     <div class="navlinks">
-      <a href="product.html">Product</a>
+      <a href="product.html" data-pt="Produto">Product</a>
       <a href="craft.html">Craft</a>
-      <a href="systems.html">Systems</a>
-      <a href="mailto:marcos@cerol.co">Contact</a>
+      <a href="solutions.html" data-pt="Soluções">Solutions</a>
+      <a href="mailto:marcos@cerol.co" data-pt="Contato">Contact</a>
+      <span class="lang-pick" role="group" aria-label="Language"><a href="?lang=en" data-lang-pick="en" hreflang="en" lang="en">EN</a><a href="?lang=pt" data-lang-pick="pt" hreflang="pt-BR" lang="pt-BR">PT</a></span>
     </div>
   </nav>
 
-  <!-- ============ CONTENT ============ -->
   <div class="content">
 
-    <!-- S1 · HERO -->
+    <!-- HERO -->
     <section class="hero">
-      <!-- the page's h1 lives for structure/SEO; visually hidden at every size -->
+      <picture class="hero-poster" aria-hidden="true">
+        <source media="(max-aspect-ratio: 4/5)" srcset="assets/hero/poster-mobile.webp">
+        <img src="assets/hero/poster-desktop.webp" alt="" fetchpriority="high" decoding="async">
+      </picture>
       <h1 class="hero-name"><span>Marcos</span> <span>Carvalho</span></h1>
       <div class="btm">
-        <!-- the spans let mobile break the roles onto their own lines -->
         <div class="lead"><span>Product Design Lead</span><span class="sep"> · </span><span>AI native</span></div>
-        <div class="side">
-          <span>Brazil · Remote worldwide</span>
-        </div>
+        <div class="side"><span data-pt="Brasil · Remoto no mundo todo">Brazil · Remote worldwide</span></div>
       </div>
       <div class="scroll-cue" aria-hidden="true">↓</div>
     </section>
 
-    <!-- S2 · WORKED WITH — the marks land before the manifesto, not after it:
-         the claim about fourteen years of complex systems arrives already
-         backed rather than asking to be taken on trust.
+    <!-- STATEMENT — one sentence, then the ground it covers -->
+    <section class="statement pad" data-theme="light">
+      <div class="max">
+        <h2 class="st-title">
+          <span class="rv-line"><span data-pt="Desenho produtos">I design products</span></span>
+          <span class="rv-line"><span data-pt="e construo os sistemas">and build the systems</span></span>
+          <span class="rv-line"><span data-pt="onde eles vivem.">they live in.</span></span>
+        </h2>
 
-         The --k on each item is an optical weight, not a guess: rendered at a
-         common height these marks carry between 12k and 54k pixels of ink, so
-         matching their heights made Caixa shout and Remessa whisper. Each k is
-         sqrt(target/ink) at 60% strength — enough to even them out, not so much
-         that Nissan stops being the wide wordmark everyone knows.
+        <!-- what the fourteen years covered, each with where it happened -->
+        <div class="lbl rv st-lbl" data-pt="Onde atuei">Worked across</div>
+        <ul class="topics">
+          <li class="rv"><b>SaaS</b><span>Solvefy · Leads2b</span></li>
+          <li class="rv"><b>CPaaS</b><span data-pt="57 bilhões de envios disparados">57 billion sends</span></li>
+          <li class="rv"><b>B2B</b><span data-pt="Martech · engajamento de vendas">Martech · sales engagement</span></li>
+          <li class="rv"><b>B2C</b><span>Remessa Online · Evil Apples</span></li>
+          <li class="rv"><b>Fintech</b><span data-pt="Growth na Remessa Online">Growth at Remessa Online</span></li>
+          <li class="rv long"><b data-pt="Plataformas de visualização de dados">Data visualisation platforms</b><span data-pt="Atendimento ao cliente Nissan">Nissan customer care</span></li>
+          <li class="rv"><b>Design systems</b><span data-pt="4 produtos, 1 sistema">4 products, 1 system</span></li>
+          <li class="rv"><b data-pt="Agentes de IA">AI agents</b><span data-pt="Orquestração no ar">Orchestration, shipped</span></li>
+        </ul>
 
-         The row drifts rather than wrapping: nine marks at this size do not fit
-         a screen, and a broken row reads as a list that ran out of room.
-         No label over it — a row of client marks under a manifesto explains
-         itself. -->
-    <section class="clients solid" data-theme="light">
-      <div class="logos" role="img" aria-label="Brands worked with: O Boticário, Caixa, Claro, Renault, Nissan, Porto Seguro, Hotmart, dLocal, Remessa Online">
-        <ul class="logos-track" id="logos-track">
-            <li class="logo" style="--k:0.959"><img src="assets/logos/boticario.svg" alt="O Boticário" loading="lazy" decoding="async"></li>
-            <li class="logo" style="--k:0.832"><img src="assets/logos/caixa.svg" alt="Caixa" loading="lazy" decoding="async"></li>
-            <li class="logo" style="--k:1.155"><img src="assets/logos/claro.svg" alt="Claro" loading="lazy" decoding="async"></li>
-            <li class="logo" style="--k:1.112"><img src="assets/logos/renault.svg" alt="Renault" loading="lazy" decoding="async"></li>
-            <li class="logo" style="--k:0.743"><img src="assets/logos/nissan.svg" alt="Nissan" loading="lazy" decoding="async"></li>
-            <li class="logo" style="--k:0.979"><img src="assets/logos/porto.svg" alt="Porto Seguro" loading="lazy" decoding="async"></li>
-            <li class="logo" style="--k:1.105"><img src="assets/logos/hotmart.svg" alt="Hotmart" loading="lazy" decoding="async"></li>
-            <li class="logo" style="--k:0.96"><img src="assets/logos/dlocal.svg" alt="dLocal" loading="lazy" decoding="async"></li>
-            <li class="logo" style="--k:1.165"><img src="assets/logos/remessa.svg" alt="Remessa Online" loading="lazy" decoding="async"></li>
+        <!-- the brands, as blocks: nine marks, nine cells -->
+        <div class="lbl rv st-lbl" data-pt="Alguns clientes">Some clients</div>
+        <ul class="brands" aria-label="Some clients" data-pt-label="Alguns clientes">
+          <li class="rv" style="--k:0.959"><img src="assets/logos/boticario.svg" alt="O Boticário" loading="lazy" decoding="async"></li>
+          <li class="rv" style="--k:0.832"><img src="assets/logos/caixa.svg" alt="Caixa" loading="lazy" decoding="async"></li>
+          <li class="rv" style="--k:1.155"><img src="assets/logos/claro.svg" alt="Claro" loading="lazy" decoding="async"></li>
+          <li class="rv" style="--k:1.112"><img src="assets/logos/renault.svg" alt="Renault" loading="lazy" decoding="async"></li>
+          <li class="rv" style="--k:0.743"><img src="assets/logos/nissan.svg" alt="Nissan" loading="lazy" decoding="async"></li>
+          <li class="rv" style="--k:0.979"><img src="assets/logos/porto.svg" alt="Porto Seguro" loading="lazy" decoding="async"></li>
+          <li class="rv" style="--k:1.105"><img src="assets/logos/hotmart.svg" alt="Hotmart" loading="lazy" decoding="async"></li>
+          <li class="rv" style="--k:0.96"><img src="assets/logos/dlocal.svg" alt="dLocal" loading="lazy" decoding="async"></li>
+          <li class="rv" style="--k:1.165"><img src="assets/logos/remessa.svg" alt="Remessa Online" loading="lazy" decoding="async"></li>
         </ul>
       </div>
     </section>
 
-    <!-- S3 · MANIFESTO -->
-    <section class="manifesto solid" id="manifesto" data-theme="light">
-      <div class="max">
-        <p data-split>I design products and build the systems they live in.</p>
-        <p data-split>Fourteen years turning complex systems into products people use. Four products under one design system. A fintech through growth. A SaaS through churn. A 20 year rebrand, shipped.</p>
-        <p data-split>Now I design and build with AI. Not around it. With it.</p>
-      </div>
-    </section>
-
-    <!-- S4 · THE TWO DOORS — the home carries no work any more, so this is
-         where it hands you over. It sits right under the manifesto: the claim
-         is made and the work is one click away, before anything asks you to
-         read further. Side by side and on the same hairline, because neither
-         of the two is the lesser one.
-         The contact follows immediately: a 50vh window onto the 3D tunnel used
-         to sit between them, and with the work gone from this page it read as
-         a screen of nothing rather than a breath. -->
-    <section class="doors solid pad" data-theme="light">
+    <!-- THE THREE DOORS — each cover is a loop of the work behind it, cut
+         like a gif. Frames load only when the doors come near the screen. -->
+    <section class="doors pad" data-theme="light">
       <div class="max">
         <div class="doors-grid three">
           <a class="door2 rv" href="product.html" data-transition>
-            <span class="door-title">Product design <span class="arrow">↗</span></span>
-            <span class="door-lead">Research to shipped system, in dense products. Fintech, ecommerce and B2B SaaS.</span>
-            <span class="door-strip" data-catalog="product" data-layout="strip" data-limit="2" aria-hidden="true"></span>
+            <span class="door-n">01</span>
+            <span class="door-title" data-pt="Produto <span class=&quot;arrow&quot;>↗</span>">Product <span class="arrow">↗</span></span>
+            <span class="door-lead" data-pt="Da pesquisa ao sistema no ar.">Research to shipped system.</span>
+            <span class="door-reel" data-reel aria-hidden="true"><img src="assets/reel/product/01.webp" alt="" loading="lazy" decoding="async" class="on"><img data-src="assets/reel/product/02.webp" alt="" decoding="async"><img data-src="assets/reel/product/03.webp" alt="" decoding="async"><img data-src="assets/reel/product/04.webp" alt="" decoding="async"><img data-src="assets/reel/product/05.webp" alt="" decoding="async"><img data-src="assets/reel/product/06.webp" alt="" decoding="async"><img data-src="assets/reel/product/07.webp" alt="" decoding="async"><img data-src="assets/reel/product/08.webp" alt="" decoding="async"></span>
           </a>
           <a class="door2 rv" href="craft.html" data-transition>
-            <span class="door-title">Graphic &amp; craft <span class="arrow">↗</span></span>
-            <span class="door-lead">Brand systems, editorial, apparel and record sleeves.</span>
-            <span class="door-strip" data-catalog="craft" data-layout="strip" data-limit="2" aria-hidden="true"></span>
+            <span class="door-n">02</span>
+            <span class="door-title">Craft <span class="arrow">↗</span></span>
+            <span class="door-lead" data-pt="Marcas, vestuário, capas de disco.">Brands, apparel, record sleeves.</span>
+            <span class="door-reel" data-reel aria-hidden="true"><img src="assets/reel/craft/01.webp" alt="" loading="lazy" decoding="async" class="on"><img data-src="assets/reel/craft/02.webp" alt="" decoding="async"><img data-src="assets/reel/craft/03.webp" alt="" decoding="async"><img data-src="assets/reel/craft/04.webp" alt="" decoding="async"><img data-src="assets/reel/craft/05.webp" alt="" decoding="async"><img data-src="assets/reel/craft/06.webp" alt="" decoding="async"><img data-src="assets/reel/craft/07.webp" alt="" decoding="async"><img data-src="assets/reel/craft/08.webp" alt="" decoding="async"></span>
           </a>
-          <a class="door2 rv" href="systems.html" data-transition>
-            <span class="door-title">Systems &amp; experiments <span class="arrow">↗</span></span>
-            <span class="door-lead">What I design and build with AI, in the open. Starting with Radar de Vagas.</span>
-            <span class="door-strip" aria-hidden="true">
-              <span class="dcover"><img src="assets/systems/radar/abertura.webp" alt="" loading="lazy" decoding="async"></span>
-              <span class="dcover"><img src="assets/systems/radar/05-nota-de-fit.webp" alt="" loading="lazy" decoding="async"></span>
-            </span>
+          <a class="door2 rv" href="solutions.html" data-transition>
+            <span class="door-n">03 <i class="door-new" data-pt="Novo">New</i></span>
+            <span class="door-title" data-pt="Soluções <span class=&quot;arrow&quot;>↗</span>">Solutions <span class="arrow">↗</span></span>
+            <span class="door-lead" data-pt="Ferramentas e sistemas que construo com IA.">Tools and systems I build with AI.</span>
+            <span class="door-reel" data-reel aria-hidden="true"><img src="assets/reel/solutions/01.webp" alt="" loading="lazy" decoding="async" class="on"><img data-src="assets/reel/solutions/02.webp" alt="" decoding="async"><img data-src="assets/reel/solutions/03.webp" alt="" decoding="async"><img data-src="assets/reel/solutions/04.webp" alt="" decoding="async"></span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- INTERSTICE A · sun · the breath between the work and the method -->
+    <!-- window for the sun mark to cross (desktop only) -->
     <div class="inter" data-inter="0"></div>
 
-    <!-- S5 · HOW I WORK — section is transparent so the 3D tunnel shows
-         through; only the left panel (.whatido .max) has a background.
-         The work moved to its own pages (product.html, craft.html), so the
-         home is hero, claim and method: these columns are what the page has
-         to say about how the work gets made.
-         Asymmetric on purpose: three equal columns would claim these three
-         things weigh the same. They don't — Product design is the titular
-         position, so it leads at full width with its own topology (voice left,
-         evidence right) and the other two run as a pair beneath.
-         Each column closes on a spec line rather than the number it used to
-         repeat: the numbers live one chapter up now.
-    -->
+    <!-- HOW I WORK — one drawing, three disciplines joining it in turn:
+         the blocks lock into a grid (product), a hub wires them up and
+         pulses through them (AI), a hand drawn line ties it all together
+         (craft). It plays on its own while on screen; the list beside it
+         follows, and each item can be tapped to jump to its step. -->
     <section class="whatido" data-theme="light">
       <div class="max">
-        <div class="lbl rv">How I work</div>
-        <div class="caps">
-
-
-          <div class="cap cap-lead rv">
-            <!-- four products, re-composed: grid, row, column. Nothing added or
-                 removed — only reorganised -->
-            <div class="fig" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1.6">
-              <rect class="blk b1" width="20" height="20" rx="2.5"/>
-              <rect class="blk b2" width="20" height="20" rx="2.5"/>
-              <rect class="blk b3" width="20" height="20" rx="2.5"/>
-              <rect class="blk b4" width="20" height="20" rx="2.5"/>
-            </svg></div>
-            <h3>Product design</h3>
-            <p class="lead">End to end, from research to shipped system.</p>
-            <div class="say">
-              <p>Dense products, fintech and ecommerce. Research to shipped system, with the architecture decided before the pixels. At Solvefy that meant four products pulled under one design system and one language.</p>
-              <p class="proof">Information architecture · design systems · high fidelity delivery</p>
-            </div>
+        <div class="lbl rv" data-pt="Como trabalho">How I work</div>
+        <div class="method" data-method>
+          <div class="mt-stage rv" aria-hidden="true">
+            <svg class="mt" viewBox="0 0 480 480" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <g class="mt-all">
+                <path class="mt-loop" pathLength="1" d="M78 318C44 214 98 84 236 66s206 70 196 196-120 178-236 160S70 330 104 236"/>
+                <circle class="mt-seed s1" cx="236" cy="66" r="7"/>
+                <circle class="mt-seed s2" cx="432" cy="262" r="7"/>
+                <circle class="mt-seed s3" cx="196" cy="422" r="7"/>
+                <g class="mt-wires">
+                  <path pathLength="1" d="M240 240 142 142"/><path pathLength="1" d="M240 240 338 142"/>
+                  <path pathLength="1" d="M240 240 142 338"/><path pathLength="1" d="M240 240 338 338"/>
+                </g>
+                <g class="mt-pulses">
+                  <path pathLength="1" d="M240 240 142 142"/><path pathLength="1" d="M240 240 338 142"/>
+                  <path pathLength="1" d="M240 240 142 338"/><path pathLength="1" d="M240 240 338 338"/>
+                </g>
+                <rect class="mt-b b1" x="100" y="100" width="84" height="84" rx="12"/>
+                <rect class="mt-b b2" x="296" y="100" width="84" height="84" rx="12"/>
+                <rect class="mt-b b3" x="100" y="296" width="84" height="84" rx="12"/>
+                <rect class="mt-b b4" x="296" y="296" width="84" height="84" rx="12"/>
+                <circle class="mt-hub" cx="240" cy="240" r="17"/>
+              </g>
+            </svg>
           </div>
-          <div class="cap cap-pair rv">
-            <!-- orchestration: the hub dispatches work down each wire and the
-                 agent that answers lights up -->
-            <div class="fig" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-              <g class="wire"><path d="M48 48 48 18"/><path d="M48 48 76 64"/><path d="M48 48 20 64"/></g>
-              <g class="pulse"><path d="M48 48 48 18"/><path d="M48 48 76 64"/><path d="M48 48 20 64"/></g>
-              <circle class="hub" cx="48" cy="48" r="7.5"/>
-              <circle class="node" cx="48" cy="18" r="4.5"/>
-              <circle class="node" cx="76" cy="64" r="4.5"/>
-              <circle class="node" cx="20" cy="64" r="4.5"/>
-            </svg></div>
-            <h3>AI native</h3>
-            <p class="lead">I build with AI, not around it.</p>
-            <div class="say">
-              <p>AI driven design workflows that shortened delivery for the whole team, then an internal leads engine designed and built end to end. The stack is in my hands daily, not in a deck.</p>
-              <p class="proof">Claude Code · MCPs · custom agents, since July 2025</p>
-            </div>
-          </div>
-          <div class="cap cap-pair rv">
-            <!-- a stroke laid down by hand, and the dots it seeds along the way -->
-            <div class="fig" aria-hidden="true"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
-              <path class="draw" pathLength="1" d="M12 70C22 34 34 24 44 40s10 26 20 20 14-24 20-38"/>
-              <circle class="seed" cx="28" cy="40" r="3.4"/>
-              <circle class="seed" cx="52" cy="56" r="3.4"/>
-              <circle class="seed" cx="74" cy="35" r="3.4"/>
-            </svg></div>
-            <h3>Craft &amp; leadership</h3>
-            <p class="lead">Craft is the delivery, not the decoration.</p>
-            <div class="say">
-              <p>Design and growth together at Solvefy, after three runs as Product Design Lead and one as Design Director. Founder of CEROL, my own studio, and of Lerdo, the cycling brand I built from zero. I hire, mentor and leave a culture behind.</p>
-              <p class="proof">Product Design Lead ×3 · Design Director · founder ×2</p>
-            </div>
-          </div>
-
-
+          <ol class="mt-list">
+            <li><button type="button" data-step="1">
+              <span class="mt-n">01</span><span class="mt-h">Product design</span>
+              <span class="mt-p" data-pt="Pesquisa primeiro, arquitetura antes do pixel, entregue como um sistema só. Na Solvefy, quatro produtos sob um design system.">Research first, architecture before pixels, shipped as one system. At Solvefy, four products under one design system.</span>
+              <span class="mt-bar"></span></button></li>
+            <li><button type="button" data-step="2">
+              <span class="mt-n">02</span><span class="mt-h">AI native</span>
+              <span class="mt-p" data-pt="Agentes e fluxos com IA dentro do processo, não ao lado dele. Encurtaram a entrega do time inteiro.">Agents and AI workflows inside the process, not beside it. They cut delivery time for the whole team.</span>
+              <span class="mt-bar"></span></button></li>
+            <li><button type="button" data-step="3">
+              <span class="mt-n">03</span><span class="mt-h" data-pt="Craft e liderança">Craft &amp; leadership</span>
+              <span class="mt-p" data-pt="Craft é a entrega, não a decoração. Três vezes Product Design Lead, uma vez Design Director.">Craft is the delivery, not the decoration. Three runs as Product Design Lead, one as Design Director.</span>
+              <span class="mt-bar"></span></button></li>
+          </ol>
         </div>
       </div>
     </section>
 
-    <!-- INTERSTICE B · urchin · the window the third mark crosses. It sits
-         between the method and the person, which is a real turn — the old one
-         sat before the contact, where it read as a screen of nothing. -->
+    <!-- window for the urchin mark to cross (desktop only) -->
     <div class="inter" data-inter="1"></div>
 
-    <!-- S6 · ABOUT — the same block closes every page, always the last thing
-         before the ask: you read the work, then who made it, then the ask.
-         No .solid: the band is transparent so the mark crossing the window
-         above it keeps travelling through instead of being sliced off by an
-         opaque edge. The contact below is still solid, and that is where the
-         tunnel ends. -->
+    <!-- ABOUT — one line -->
     <section class="about pad" data-theme="light">
       <div class="max grid">
-        <p class="rv" data-split><b>The punk and DIY scene made me a designer years before I understood what design was.</b> Self taught musician since 13. Moved by everything new. Fourteen years later I run CEROL, my own design company, and still build worlds end to end, from the pixel to the P&amp;L.</p>
+        <p class="rv" data-pt="<b>O punk e o faça você mesmo me fizeram designer.</b> Hoje comando a CEROL, minha empresa de design."><b>Punk and DIY made me a designer.</b> Today I run CEROL, my own design company.</p>
         <div class="portrait rv"><img src="assets/photos/portrait-960.webp" srcset="assets/photos/portrait-960.webp 960w, assets/photos/portrait.webp 1400w" sizes="(max-width:760px) 92vw, 40vw" alt="Marcos Carvalho" width="1400" height="1867" loading="lazy" decoding="async"></div>
       </div>
     </section>
 
-    <!-- S7 · CONTACT -->
+    <!-- CONTACT -->
     <footer class="contact solid pad" data-theme="light">
       <div class="max">
-        <div class="cta rv-line"><span>Let's build<br>something. <a href="mailto:marcos@cerol.co" data-magnetic>marcos@cerol.co</a></span></div>
+        <div class="cta rv-line"><span data-pt="Vamos construir<br>algo juntos. <a href=&quot;mailto:marcos@cerol.co&quot; data-magnetic>marcos@cerol.co</a>">Let's build<br>something. <a href="mailto:marcos@cerol.co" data-magnetic>marcos@cerol.co</a></span></div>
         <div class="meta">
           <span>©. Marcos Carvalho — 2026</span>
           <span>Product Design Lead · AI native</span>
@@ -258,15 +198,12 @@
 
   </div>
 
-  <!-- ============ FLOATING UI ============ -->
-  <!-- iOS 13+ gates the gyroscope behind a user-gesture permission request;
-       scene.js reveals this chip only on touch devices that need it -->
   <button id="motion-cta" class="motion-chip" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
       <rect x="8.2" y="4" width="7.6" height="16" rx="1.6" transform="rotate(10 12 12)"/>
       <path d="M4 9.4A9.6 9.6 0 0 1 5.8 5.9M20 14.6a9.6 9.6 0 0 1-1.8 3.5"/>
     </svg>
-    <span>Tilt to explore</span>
+    <span data-pt="Incline para explorar">Tilt to explore</span>
   </button>
   <div id="thumb"></div>
   <div id="cursor"><div class="ring"></div><div class="dot"></div></div>
@@ -274,15 +211,16 @@
 
 <script type="importmap">
 { "imports": {
-  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js",
   "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
 }}
 </script>
+<script src="js/lang.js?v=310"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script type="module" src="js/scene.js?v=89"></script>
-<script type="module" src="js/main.js?v=89"></script>
-<script type="module" src="js/work.js?v=89"></script>
+<script type="module" src="js/scene.js?v=302"></script>
+<script type="module" src="js/main.js?v=314"></script>
+<script type="module" src="js/v3.js?v=301"></script>
 </body>
 </html>

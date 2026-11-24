@@ -10,9 +10,11 @@ gsap.registerPlugin(ScrollTrigger);
 /* ============ ONE FETCH OF data/projects.json PER PAGE ============
    main.js (montage, craft wall, row hovers) and work.js (the catalogs) both
    read it; they share this one request instead of each making their own. */
-window.__getProjects = () => (window.__projectsP ||= fetch('data/projects.json', { cache: 'no-cache' })
-  .then(r => (r.ok ? r.json() : null))
-  .catch(() => null));
+window.__getProjects = () => (window.__projectsP ||= Promise.all([
+    fetch('data/projects.json', { cache: 'no-cache' }).then(r => (r.ok ? r.json() : null)).catch(() => null),
+    /* v3: in Portuguese, the sidecar with the translated cases (lang.js) */
+    window.__ptFetch ? window.__ptFetch() : Promise.resolve(null)
+  ]).then(([d, pt]) => (window.__ptMerge ? window.__ptMerge(d, pt) : d)));
 
 /* ============ SELECTED WORK ============
    The Selected-work list is baked canonically into index.html (every project,
@@ -25,7 +27,16 @@ window.__getProjects = () => (window.__projectsP ||= fetch('data/projects.json',
 function runLoader() {
   const loader = document.getElementById('loader');
   const wipe = document.getElementById('loader-wipe');
-  if (!loader || !wipe) { document.body.classList.add('is-ready'); return; }
+  /* v3: the counter is gone. It held the whole page behind a curtain until
+     the 3D marks were built (5–6s on a phone connection); the page now shows
+     on its first paint and the 3D catches up on its own. */
+  if (!loader || !wipe || document.body.classList.contains('v3')) {
+    if (loader) loader.style.display = 'none';
+    if (wipe) wipe.style.display = 'none';
+    document.body.classList.add('is-ready');
+    playHeroReveal();
+    return;
+  }
   const pct = loader.querySelector('.pct');
   const mark = loader.querySelector('.wordmark');
   /* only the home runs the WebGL tunnel. On a page with no <canvas id="gl">
@@ -316,10 +327,20 @@ if (craft) {
 (function () {
   const cursor = document.getElementById('cursor');
   if (!cursor || matchMedia('(hover: none)').matches) return;
-  let cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
-  addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; });
+  let cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy, on = false;
+  const root = document.documentElement;
+  addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch') return;
+    tx = e.clientX; ty = e.clientY;
+    /* v3: hide the system pointer only now that the drawn one is following
+       (see main.css); start it where the mouse is, not mid-screen */
+    if (!on) { on = true; cx = tx; cy = ty; root.classList.add('cursor-on'); }
+    root.classList.remove('cursor-out');
+  });
+  /* leaving the window: the drawn cursor goes with the mouse */
+  document.addEventListener('mouseout', e => { if (!e.relatedTarget) root.classList.add('cursor-out'); });
   window.__bindCursorTargets = (root = document) =>
-    root.querySelectorAll('a:not([data-cur]), .row:not([data-cur]), .tile:not([data-cur]), [data-magnetic]:not([data-cur])').forEach(el => {
+    root.querySelectorAll('a:not([data-cur]), button:not([data-cur]), .row:not([data-cur]), .tile:not([data-cur]), [data-magnetic]:not([data-cur])').forEach(el => {
     el.setAttribute('data-cur', '');
     el.addEventListener('pointerenter', () => cursor.classList.add('big'));
     el.addEventListener('pointerleave', () => cursor.classList.remove('big'));
@@ -514,7 +535,7 @@ document.querySelectorAll('[data-magnetic]').forEach(btn => {
       e.preventDefault();
       sessionStorage.setItem('pt-arrive', '1');
       gsap.to(overlay, {
-        clipPath: 'inset(0% 0 0 0)', duration: 0.6, ease: 'expo.inOut',
+        clipPath: 'inset(0% 0 0 0)', duration: 0.38, ease: 'expo.in',
         onComplete: () => { window.location.href = href; }
       });
     });
@@ -526,7 +547,7 @@ document.querySelectorAll('[data-magnetic]').forEach(btn => {
   if (sessionStorage.getItem('pt-arrive')) {
     sessionStorage.removeItem('pt-arrive');
     overlay.style.clipPath = 'inset(0 0 0 0)';
-    gsap.to(overlay, { clipPath: 'inset(100% 0 0 0)', duration: 0.7, delay: 0.05, ease: 'expo.inOut' });
+    gsap.to(overlay, { clipPath: 'inset(100% 0 0 0)', duration: 0.5, ease: 'expo.out' });
   }
 })();
 
@@ -881,6 +902,9 @@ document.querySelectorAll('[data-magnetic]').forEach(btn => {
     });
   }
 
+  /* v3: only pages that actually show CMS content pay for the JSON */
+  if (!document.getElementById('hero-montage') && !document.getElementById('wall')
+      && !document.querySelector('.row[data-thumb], [data-catalog]')) return;
   window.__getProjects()
     .then(d => {
       if (!d) return;

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Graphic &amp; craft — Marcos Carvalho</title>
+<title data-pt="Gráfico e craft · Marcos Carvalho">Graphic &amp; craft — Marcos Carvalho</title>
 <meta name="description" content="Brand, editorial and album work by Marcos Carvalho: dlocal CONNECT, void, Feel.U, viva la vegan, Lerdo, Vertigem, Mononoke and more." />
 <meta property="og:title" content="Graphic &amp; craft — Marcos Carvalho" />
 <meta property="og:description" content="Brand systems, editorial, apparel and album covers. The same hands that ship product." />
@@ -13,25 +13,21 @@
 <link rel="preload" as="font" href="fonts/Pacaembu-Regular.woff2" type="font/woff2" crossorigin>
 <link rel="preload" as="font" href="fonts/Pacaembu-Bold.woff2" type="font/woff2" crossorigin>
 <link rel="preload" as="font" href="fonts/dTJakob_Rg.woff2" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/main.css?v=89" />
+<script>try{var l=new URLSearchParams(location.search).get('lang')||localStorage.getItem('site-lang')||(/^pt/i.test(navigator.language||'')?'pt':'en');if(l==='pt')document.documentElement.classList.add('lang-pt')}catch(e){}</script>
+<link rel="stylesheet" href="css/main.css?v=314" />
 </head>
-<body>
-
-  <div id="loader">
-    <div class="pct">0</div>
-    <div class="wordmark">MARCOS CARVALHO</div>
-  </div>
-  <div id="loader-wipe"></div>
+<body class="v3">
 
   <div id="grain"></div>
 
   <nav class="nav" id="nav">
     <a class="brand" href="index.html"><span>Marcos</span> <span>Carvalho</span></a>
     <div class="navlinks">
-      <a href="product.html">Product</a>
+      <a href="product.html" data-pt="Produto">Product</a>
       <a href="craft.html" aria-current="page">Craft</a>
-      <a href="systems.html">Systems</a>
-      <a href="mailto:marcos@cerol.co">Contact</a>
+      <a href="solutions.html" data-pt="Soluções">Solutions</a>
+      <a href="mailto:marcos@cerol.co" data-pt="Contato">Contact</a>
+      <span class="lang-pick" role="group" aria-label="Language"><a href="?lang=en" data-lang-pick="en" hreflang="en" lang="en">EN</a><a href="?lang=pt" data-lang-pick="pt" hreflang="pt-BR" lang="pt-BR">PT</a></span>
     </div>
   </nav>
 
@@ -42,10 +38,9 @@
          as two pages stitched together. -->
     <header class="masthead solid pad" data-theme="light">
       <div class="max">
-        <div class="lbl rv">Graphic &amp; craft</div>
-        <h1 class="mast-title rv-line"><span>The same hands that ship product build brands, apparel and album covers.</span></h1>
-        <p class="mast-lead rv">Brand systems, editorial, apparel and record sleeves. Here the image is the argument, so it leads.</p>
-      </div>
+        <div class="lbl rv" data-pt="Gráfico e craft">Graphic &amp; craft</div>
+        <h1 class="mast-title rv-line"><span data-pt="Marcas, vestuário e capas de disco.">Brands, apparel and album covers.</span></h1>
+              </div>
     </header>
 
     <!-- C2 · THE GRID — built from data/projects.json by js/work.js: everything
@@ -53,7 +48,7 @@
          cropped to a uniform box; the offset in CSS is what holds the column. -->
     <section class="craftgrid pad solid" id="craftwork" data-theme="light">
       <div class="max">
-        <div class="lbl rv">Selected</div>
+        <div class="lbl rv" data-pt="Selecionados">Selected</div>
         <div class="gwrap" data-catalog="craft" data-layout="grid"></div>
       </div>
     </section>
@@ -68,7 +63,7 @@
     <section class="loose solid" id="loose" data-theme="light">
       <div class="loose-stage">
         <div class="loose-head">
-          <div class="lbl">Loose craft — keep scrolling · tap to open</div>
+          <div class="lbl" data-pt="Craft avulso · continue rolando · toque para abrir">Loose craft — keep scrolling · tap to open</div>
         </div>
         <div class="wall" id="wall">
           <button class="tile" data-full="assets/work/225576979/01.webp" data-title="void · floating spa" data-id="225576979"><img src="assets/work/225576979/01.webp" loading="lazy" decoding="async" alt="void · floating spa" style="aspect-ratio:600/338"></button>
@@ -137,8 +132,8 @@
     <section class="door solid pad" data-theme="light">
       <div class="max">
         <a class="door-link rv" href="product.html" data-transition>
-          <span class="door-title">Product work <span class="arrow">↗</span></span>
-          <span class="door-lead">Dense products, fintech and ecommerce. Research to shipped system, and the systems that hold after it ships.</span>
+          <span class="door-title" data-pt="Trabalho de produto <span class=&quot;arrow&quot;>↗</span>">Product work <span class="arrow">↗</span></span>
+          <span class="door-lead" data-pt="Da pesquisa ao sistema no ar.">Research to shipped system.</span>
           <span class="door-strip" data-catalog="product" data-layout="strip" data-limit="4" aria-hidden="true"></span>
         </a>
       </div>
@@ -149,7 +144,7 @@
          is no 3D canvas on this one, so it reads the same either way. -->
     <section class="about pad" data-theme="light">
       <div class="max grid">
-        <p class="rv" data-split><b>The punk and DIY scene made me a designer years before I understood what design was.</b> Self taught musician since 13. Moved by everything new. Fourteen years later I run CEROL, my own design company, and still build worlds end to end, from the pixel to the P&amp;L.</p>
+        <p class="rv" data-pt="<b>O punk e o faça você mesmo me fizeram designer.</b> Hoje comando a CEROL, minha empresa de design."><b>Punk and DIY made me a designer.</b> Today I run CEROL, my own design company.</p>
         <div class="portrait rv"><img src="assets/photos/portrait-960.webp" srcset="assets/photos/portrait-960.webp 960w, assets/photos/portrait.webp 1400w" sizes="(max-width:760px) 92vw, 40vw" alt="Marcos Carvalho" width="1400" height="1867" loading="lazy" decoding="async"></div>
       </div>
     </section>
@@ -158,7 +153,7 @@
     <!-- C6 · CONTACT -->
     <footer class="contact solid pad" data-theme="light">
       <div class="max">
-        <div class="cta rv-line"><span>Let's build<br>something. <a href="mailto:marcos@cerol.co" data-magnetic>marcos@cerol.co</a></span></div>
+        <div class="cta rv-line"><span data-pt="Vamos construir<br>algo juntos. <a href=&quot;mailto:marcos@cerol.co&quot; data-magnetic>marcos@cerol.co</a>">Let's build<br>something. <a href="mailto:marcos@cerol.co" data-magnetic>marcos@cerol.co</a></span></div>
         <div class="meta">
           <span>©. Marcos Carvalho — 2026</span>
           <span>Product Design Lead · AI native</span>
@@ -173,10 +168,11 @@
   <div id="cursor"><div class="ring"></div><div class="dot"></div></div>
   <div id="page-transition"></div>
 
+<script src="js/lang.js?v=310"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script type="module" src="js/main.js?v=89"></script>
-<script type="module" src="js/work.js?v=89"></script>
+<script type="module" src="js/main.js?v=314"></script>
+<script type="module" src="js/work.js?v=300"></script>
 </body>
 </html>
