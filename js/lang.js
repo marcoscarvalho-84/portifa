@@ -26,11 +26,19 @@
   'use strict';
   var KEY = 'site-lang';
   var q = new URLSearchParams(location.search).get('lang');
-  var stored = null;
-  try { stored = localStorage.getItem(KEY); } catch (e) {}
-  if (q === 'pt' || q === 'en') { try { localStorage.setItem(KEY, q); } catch (e) {} }
+  if (q !== 'pt' && q !== 'en') q = null;
+  /* some browsers keep nothing (in-app browsers, blocked site data): there
+     the choice travels in the URL instead of being remembered */
+  var canStore = false, stored = null;
+  try {
+    localStorage.setItem(KEY + '-probe', '1');
+    localStorage.removeItem(KEY + '-probe');
+    canStore = true;
+    stored = localStorage.getItem(KEY);
+    if (q) localStorage.setItem(KEY, q);
+  } catch (e) {}
   var lang = /^\/apresentacao\/?$/.test(location.pathname) ? 'pt'
-    : (q === 'pt' || q === 'en') ? q
+    : q ? q
     : (stored === 'pt' || stored === 'en') ? stored
     : (/^pt\b/i.test(navigator.language || '') ? 'pt' : 'en');
   var PT = lang === 'pt';
@@ -55,11 +63,37 @@
       e.preventDefault();
       if (to === lang) return;
       try { localStorage.setItem(KEY, to); } catch (err) {}
+      /* the language rides in the URL, so the switch works even where
+         nothing can be stored; the address is cleaned after the reload */
       var u = new URL(location.href);
-      u.searchParams.delete('lang');
+      u.searchParams.set('lang', to);
       location.replace(u.toString());
     });
   });
+
+  /* remembered: drop ?lang from the address so links copied from it stay clean */
+  if (q && canStore && history.replaceState) {
+    try {
+      var clean = new URL(location.href);
+      clean.searchParams.delete('lang');
+      history.replaceState(history.state, '', clean.pathname + clean.search + clean.hash);
+    } catch (e) {}
+  }
+
+  /* not remembered: carry the language on every link to another page of the
+     site (capture phase, so the page-transition handler reads the new href) */
+  if (q && !canStore) {
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if (!a || a.hasAttribute('data-lang-pick') || a.hasAttribute('data-lang-switch')) return;
+      var u;
+      try { u = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+      if (u.origin !== location.origin) return;
+      if (u.pathname === location.pathname && u.search === location.search && u.hash) return;
+      u.searchParams.set('lang', lang);
+      a.setAttribute('href', u.pathname + u.search + u.hash);
+    }, true);
+  }
 
   /* presentation.html keeps its own single link to the other language */
   var sw = document.querySelector('[data-lang-switch]');

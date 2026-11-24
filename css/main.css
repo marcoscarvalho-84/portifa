@@ -1658,6 +1658,12 @@ html:not(.cursor-on) #cursor,html.cursor-out #cursor{opacity:0}
 .lang-pick a + a{border-left:1px solid currentColor}
 .lang-pick a[aria-current="true"]{opacity:1}
 .lang-pick a:hover{opacity:1}
+/* touch: two small letters are a hard target, so the tap area grows past
+   them (taller, never into the other letter) without moving anything */
+@media (pointer:coarse){
+  .lang-pick a{position:relative}
+  .lang-pick a::before{content:"";position:absolute;top:-12px;bottom:-12px;left:-2px;right:-2px}
+}
 /* no flash of English when the visitor chose Portuguese: the page stays
    hidden until lang.js has swapped the text (and shows anyway after 1.2s
    if that script never runs) */
